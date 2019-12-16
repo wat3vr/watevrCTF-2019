@@ -1,0 +1,17 @@
+{
+    "flag": "d0n7_y0u_l0v3_350l4n65_45_much_45_w3_d0?",
+    "append_random_data": false,
+    "follows_flag_format": false,
+    "categories": [
+        "misc"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "Ancient Script",
+    "description": "Hmm, this looks like something my english teacher would give me, doesn't it? Too bad i forgot english...\nNOTE: the flag for this challenge is not in the standard watevr{} format. Submit it as is right from the challenge without the flag format.",
+    "uses_docker": false,
+    "build_script": "python3 build.py",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

@@ -1,0 +1,17 @@
+{
+    "flag": "factoring_polynomials_over_finite_fields_is_too_ez",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "crypto"
+    ],
+    "authors": [
+        "QMechanic"
+    ],
+    "title": "ECC-RSA",
+    "description": "ECC + RSA = Double security!",
+    "uses_docker": false,
+    "build_script": "bash build.sh",
+    "solve_script": "sage ecc-rsa_solution.sage",
+    "changeable_flag": false
+}

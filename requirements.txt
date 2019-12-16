@@ -1,0 +1,15 @@
+requests
+beautifulsoup4
+docker
+pillow
+numpy
+opencv-python
+sympy
+https://github.com/Gallopsled/pwntools/archive/dev3.zip
+discord
+aiohttp
+matplotlib
+flask
+boto3
+gitpython
+scipy

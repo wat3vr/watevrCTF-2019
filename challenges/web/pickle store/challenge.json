@@ -1,0 +1,20 @@
+{
+    "flag": "p1ckl3_15_4n_3v3n_b3773r_3ncryp710n_m37h0d",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "web"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "Pickle Store",
+    "description": "After I went bankrupt running my cookie store i decided to improve my security and start a pickle store. Turns out pickles are way more profitable!",
+    "uses_docker": true,
+    "website_services": [
+        80
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "true",
+    "changeable_flag": true
+}

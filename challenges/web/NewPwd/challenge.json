@@ -1,0 +1,20 @@
+{
+    "flag": "why_15_c4p7ch4_50_h4rd_70_5p3ll",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "web"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "NewPwd",
+    "description": "Logging in has never been more secure with our new, revolutionary log-in method!",
+    "uses_docker": true,
+    "website_services": [
+        80
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

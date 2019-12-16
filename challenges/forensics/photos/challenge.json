@@ -1,0 +1,17 @@
+{
+    "flag": "collages_are_nice_8037155e0527f906d7ae4720",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "forensics"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "Personal Photos",
+    "description": "While practicing magic, Emily accidentally swung her magic wand towards her computer and corrupted some of her photos! Since you are pretty good with computers, she came to you asking if you could recover them.",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "./solve.sh",
+    "changeable_flag": false
+}

@@ -1,0 +1,17 @@
+{
+    "flag": "hey_google_play_never_gonna_give_you_up_0d80d47743",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "misc"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "Axela",
+    "description": "Tired of Alexa listening to you constantly? Want someone who will definitely totally not look at what you are doing? Try private messaging Axela! You can find her in our <a href=\"https://discord.gg/We5GxvC\">official Discord server</a>.",
+    "uses_docker": true,
+    "build_script": "true",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": false
+}

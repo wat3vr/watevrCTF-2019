@@ -1,0 +1,21 @@
+{
+    "flag": "b64_15_4_6r347_3ncryp710n_m37h0d",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "web",
+        "beginner"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "Cookie Store",
+    "description": "Welcome to my cookie store!",
+    "uses_docker": true,
+    "website_services": [
+        80
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "true",
+    "changeable_flag": true
+}

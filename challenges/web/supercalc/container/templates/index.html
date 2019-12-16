@@ -1,0 +1,143 @@
+<html>
+
+<head>
+    <title>Super Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton|Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Roboto Mono', monospace;
+            text-shadow: 2px 2px 3px #00000050;
+        }
+
+        h1 {
+            margin-top: 100px;
+            text-shadow:
+                -10px -10px 1px hsl(0, 100%, 50%),
+                -20px -20px 1px hsl(45, 100%, 50%),
+                -30px -30px 1px hsl(90, 100%, 50%),
+                -40px -40px 1px hsl(135, 100%, 50%),
+                -50px -50px 1px hsl(180, 100%, 50%),
+                -60px -60px 1px hsl(225, 100%, 50%),
+                -70px -70px 1px hsl(270, 100%, 50%),
+                -80px -80px 1px hsl(315, 100%, 50%);
+            font-family: 'Anton', sans-serif;
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        #codeArea {
+            padding: 16px;
+            background-color: rgb(199, 255, 236);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            box-shadow: 5px 5px 5px #00000030;
+        }
+
+        #container {
+            max-width: 1140px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        textarea {
+            width: 100%;
+            margin-bottom: 16px;
+            box-shadow: 5px 5px 5px #00000030;
+            border-radius: 8px;
+        }
+
+        .button {
+            background-color: lightskyblue;
+            border-radius: 4px;
+            font-size: 24px;
+            padding: 16px 32px;
+            border-width: 1px;
+            border-color: rgb(69, 184, 255);
+            border: 1px solid;
+            box-shadow: 5px 5px 5px #00000030;
+        }
+
+        form {
+            margin-bottom: 0px;
+        }
+
+        #history {
+            padding: 16px;
+            background-color: rgb(168, 255, 168);
+            border-radius: 8px;
+            box-shadow: 5px 5px 5px #00000030;
+        }
+
+        .divider {
+            margin: 16px 0;
+            border: 0px solid;
+            border-top-width: 1px;
+            height: 0px;
+            box-shadow: 5px 5px 5px #00000030;
+        }
+
+        .code {
+            white-space: pre-wrap;
+            background-color: lightgray;
+            display: inline-block;
+            padding: 2px 4px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            border: 1px solid;
+            box-shadow: 5px 5px 5px #00000030;
+        }
+
+        .result {
+            background-color: rgb(0, 255, 0);
+            display: inline-block;
+            padding: 2px 4px;
+            border-radius: 4px;
+            border: 1px solid;
+            box-shadow: 5px 5px 5px #00000030;
+        }
+
+        .error {
+            white-space: pre-wrap;
+            background-color: rgb(255, 125, 125);
+            display: inline-block;
+            padding: 2px 4px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            border: 1px solid;
+            box-shadow: 5px 5px 5px #00000030;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Super Calculator</h1>
+        <div id="codeArea">
+            <form method=POST>
+                <textarea class="form-control" name="code" rows="8"></textarea>
+                <input type="submit" class="button" value="Calculate!">
+            </form>
+        </div>
+        {% if history %}
+        <div id="history">
+            {% for item in history %}
+            <div class="item">
+                Formatted calculation: <div class="code">{{ item['code'] }}</div>
+                <div></div>
+                {% if item['error'] %}
+                Error: <div class="error">{{ item['error'] }}</div>
+                {% else %}
+                Result: <div class="result">{{ item['result'] }}</div>
+                {% endif %}
+            </div>
+            {% if not loop.last %}
+            <div class="divider"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

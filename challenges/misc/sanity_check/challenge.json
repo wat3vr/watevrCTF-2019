@@ -1,0 +1,17 @@
+{
+    "flag": "san1ty_ch3ck",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "misc"
+    ],
+    "authors": [
+        "loke"
+    ],
+    "title": "Sanity check",
+    "description": "6anity check i6 on di6cord",
+    "uses_docker": false,
+    "build_script": "./build",
+    "solve_script": "./solve",
+    "changeable_flag": false
+}

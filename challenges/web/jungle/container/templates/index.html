@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>The Jungle</title>
+        <style>
+            * {
+                text-align: center
+            }
+            img {
+                width: 50%
+            }
+            div {
+                margin-bottom: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p>{{ text|safe }}</p>
+            {% if link %}<a href="/path/1">To the temple</a>{% endif %}
+        </div>
+        <img src="{{ image }}" alt="">
+    </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "watevrctf-2019",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.com/mateuszdrwal/watevrCTF-2019.svg?token=4HxouMSxJNRpTrgxhYqN&branch=master)](https://travis-ci.com/mateuszdrwal/watevrCTF-2019)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateuszdrwal/watevrCTF-2019.git"
+  },
+  "author": "watevr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mateuszdrwal/watevrCTF-2019/issues"
+  },
+  "homepage": "https://github.com/mateuszdrwal/watevrCTF-2019#readme",
+  "dependencies": {
+    "jscrewit": "^2.10.1",
+    "pkcs7-padding": "^0.1.1",
+    "rijndael-js": "^2.0.0"
+  }
+}

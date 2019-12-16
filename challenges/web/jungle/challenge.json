@@ -1,0 +1,20 @@
+{
+    "flag": "l375_pl4y_50m3_60lf",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "web"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "The Jungle",
+    "description": "I heard there was a temple with some sweet l00t in this jungle. Let's just hope i won't get eaten by tigers on the way.",
+    "uses_docker": true,
+    "website_services": [
+        80
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

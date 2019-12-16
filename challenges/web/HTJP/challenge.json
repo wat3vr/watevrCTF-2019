@@ -1,0 +1,21 @@
+{
+    "flag": "0bj3c71v3ly_superior_70_h77p",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "web"
+    ],
+    "authors": [
+        "mateuszdrwal",
+        "daydun"
+    ],
+    "title": "HTJP",
+    "description": "Wasn't this supposed to be a joke?\nYou should go take a look at <code>/i_store_my_flag_inside_this_file.txt</code>\n\nNote: Because of an oversight in the specification, Content-Length is required.\nAlso, the link below should be htjp:// instead of http://, sorry about that.",
+    "uses_docker": true,
+    "website_services": [
+        8000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

@@ -1,0 +1,18 @@
+{
+    "flag": "7h475_4c7u4lly_r34lly_cu73_7h0u6h",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "forensics",
+        "beginner"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "Evil Cuteness",
+    "description": "Omg, look at that cute kitty! It's so cute I can't take my eyes off it!\n\nWait, where did my flag go?",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "./solve.sh",
+    "changeable_flag": true
+}

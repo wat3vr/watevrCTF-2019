@@ -1,0 +1,4 @@
+The Shakespeare Programming Language and all associated programs and
+whatnot are licensed under the GNU General Public License. The example
+.spl files are, too -- the reason they don't have the note first thing
+in the file is that SPL doesn't support arbitrary comments.

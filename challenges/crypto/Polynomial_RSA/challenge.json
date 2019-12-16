@@ -1,0 +1,17 @@
+{
+    "flag": "RSA_from_ikea_is_fun_but_insecure#k20944uehdjfnjd335uro",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "crypto"
+    ],
+    "authors": [
+        "QMechanic", "nnewram"
+    ],
+    "title": "Swedish RSA",
+    "description": "Also known as Polynomial RSA.\nThis is just some abstract algebra for fun!",
+    "uses_docker": false,
+    "build_script": "bash move.sh",
+    "solve_script": "sage polynomial_rsa_solution.sage",
+    "changeable_flag": true
+}

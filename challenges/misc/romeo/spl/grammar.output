@@ -1,0 +1,4654 @@
+Grammar
+
+    0 $accept: StartSymbol $end
+
+    1 Act: ActHeader Scene
+    2    | Act Scene
+
+    3 ActHeader: ACT_ROMAN COLON Comment EndSymbol
+    4          | ACT_ROMAN COLON Comment error
+    5          | ACT_ROMAN error Comment EndSymbol
+
+    6 Adjective: POSITIVE_ADJECTIVE
+    7          | NEUTRAL_ADJECTIVE
+    8          | NEGATIVE_ADJECTIVE
+
+    9 BinaryOperator: THE_DIFFERENCE_BETWEEN
+   10               | THE_PRODUCT_OF
+   11               | THE_QUOTIENT_BETWEEN
+   12               | THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN
+   13               | THE_SUM_OF
+
+   14 CharacterDeclaration: CHARACTER COMMA Comment EndSymbol
+   15                     | error COMMA Comment EndSymbol
+   16                     | CHARACTER error Comment EndSymbol
+
+   17 CharacterDeclarationList: CharacterDeclaration
+   18                         | CharacterDeclarationList CharacterDeclaration
+
+   19 CharacterList: CHARACTER AND CHARACTER
+   20              | CHARACTER COMMA CharacterList
+
+   21 Comment: String
+   22        | error
+
+   23 Comparative: NegativeComparative
+   24            | PositiveComparative
+
+   25 Comparison: NOT NonnegatedComparison
+   26           | NonnegatedComparison
+
+   27 Conditional: IF_SO
+   28            | IF_NOT
+
+   29 Constant: ARTICLE UnarticulatedConstant
+   30         | FIRST_PERSON_POSSESSIVE UnarticulatedConstant
+   31         | SECOND_PERSON_POSSESSIVE UnarticulatedConstant
+   32         | THIRD_PERSON_POSSESSIVE UnarticulatedConstant
+   33         | NOTHING
+
+   34 EndSymbol: QuestionSymbol
+   35          | StatementSymbol
+
+   36 EnterExit: LEFT_BRACKET ENTER CHARACTER RIGHT_BRACKET
+   37          | LEFT_BRACKET ENTER CharacterList RIGHT_BRACKET
+   38          | LEFT_BRACKET EXIT CHARACTER RIGHT_BRACKET
+   39          | LEFT_BRACKET EXEUNT CharacterList RIGHT_BRACKET
+   40          | LEFT_BRACKET EXEUNT RIGHT_BRACKET
+   41          | LEFT_BRACKET ENTER error RIGHT_BRACKET
+   42          | LEFT_BRACKET EXIT error RIGHT_BRACKET
+   43          | LEFT_BRACKET EXEUNT error RIGHT_BRACKET
+   44          | LEFT_BRACKET error RIGHT_BRACKET
+
+   45 Equality: AS Adjective AS
+   46         | AS error AS
+   47         | AS Adjective error
+
+   48 Inequality: Comparative THAN
+   49           | Comparative error
+
+   50 InOut: OpenYour HEART StatementSymbol
+   51      | SPEAK SECOND_PERSON_POSSESSIVE MIND StatementSymbol
+   52      | LISTEN_TO SECOND_PERSON_POSSESSIVE HEART StatementSymbol
+   53      | OpenYour MIND StatementSymbol
+   54      | OpenYour error StatementSymbol
+   55      | SPEAK error MIND StatementSymbol
+   56      | LISTEN_TO error HEART StatementSymbol
+   57      | SPEAK SECOND_PERSON_POSSESSIVE error StatementSymbol
+   58      | LISTEN_TO SECOND_PERSON_POSSESSIVE error StatementSymbol
+   59      | OpenYour HEART error
+   60      | SPEAK SECOND_PERSON_POSSESSIVE MIND error
+   61      | LISTEN_TO SECOND_PERSON_POSSESSIVE HEART error
+   62      | OpenYour MIND error
+
+   63 Jump: JumpPhrase ACT_ROMAN StatementSymbol
+   64     | JumpPhrase SCENE_ROMAN StatementSymbol
+   65     | JumpPhrase error StatementSymbol
+
+   66 JumpPhrase: JumpPhraseBeginning JumpPhraseEnd
+   67           | error JumpPhraseEnd
+   68           | JumpPhraseBeginning error
+
+   69 JumpPhraseBeginning: LET_US
+   70                    | WE_MUST
+   71                    | WE_SHALL
+
+   72 JumpPhraseEnd: PROCEED_TO
+   73              | RETURN_TO
+
+   74 Line: CHARACTER COLON SentenceList
+   75     | CHARACTER COLON error
+   76     | CHARACTER error SentenceList
+
+   77 NegativeComparative: NEGATIVE_COMPARATIVE
+   78                    | MORE NEGATIVE_ADJECTIVE
+   79                    | LESS POSITIVE_ADJECTIVE
+
+   80 NegativeConstant: NegativeNoun
+   81                 | NEGATIVE_ADJECTIVE NegativeConstant
+   82                 | NEUTRAL_ADJECTIVE NegativeConstant
+
+   83 NegativeNoun: NEGATIVE_NOUN
+
+   84 NonnegatedComparison: Equality
+   85                     | Inequality
+
+   86 OpenYour: OPEN SECOND_PERSON_POSSESSIVE
+   87         | OPEN error
+
+   88 Play: Title CharacterDeclarationList Act
+   89     | Play Act
+   90     | Title CharacterDeclarationList error
+   91     | Title error Act
+   92     | error CharacterDeclarationList Act
+
+   93 PositiveComparative: POSITIVE_COMPARATIVE
+   94                    | MORE POSITIVE_ADJECTIVE
+   95                    | LESS NEGATIVE_ADJECTIVE
+
+   96 PositiveConstant: PositiveNoun
+   97                 | POSITIVE_ADJECTIVE PositiveConstant
+   98                 | NEUTRAL_ADJECTIVE PositiveConstant
+
+   99 PositiveNoun: NEUTRAL_NOUN
+  100             | POSITIVE_NOUN
+
+  101 Pronoun: FIRST_PERSON
+  102        | FIRST_PERSON_REFLEXIVE
+  103        | SECOND_PERSON
+  104        | SECOND_PERSON_REFLEXIVE
+
+  105 Question: BE Value Comparison Value QuestionSymbol
+  106         | BE error Comparison Value QuestionSymbol
+  107         | BE Value error Value QuestionSymbol
+  108         | BE Value Comparison error QuestionSymbol
+
+  109 QuestionSymbol: QUESTION_MARK
+
+  110 Recall: RECALL String StatementSymbol
+  111       | RECALL error StatementSymbol
+  112       | RECALL String error
+
+  113 Remember: REMEMBER Value StatementSymbol
+  114         | REMEMBER error StatementSymbol
+  115         | REMEMBER Value error
+
+  116 Scene: SceneHeader SceneContents
+
+  117 SceneContents: EnterExit
+  118              | Line
+  119              | SceneContents EnterExit
+  120              | SceneContents Line
+
+  121 SceneHeader: SCENE_ROMAN COLON Comment EndSymbol
+  122            | SCENE_ROMAN COLON Comment error
+  123            | SCENE_ROMAN error Comment EndSymbol
+
+  124 Sentence: UnconditionalSentence
+  125         | Conditional COMMA UnconditionalSentence
+  126         | Conditional error UnconditionalSentence
+
+  127 SentenceList: Sentence
+  128             | SentenceList Sentence
+
+  129 StartSymbol: Play
+
+  130 Statement: SECOND_PERSON BE Constant StatementSymbol
+  131          | SECOND_PERSON UnarticulatedConstant StatementSymbol
+  132          | SECOND_PERSON BE Equality Value StatementSymbol
+  133          | SECOND_PERSON BE Constant error
+  134          | SECOND_PERSON BE error StatementSymbol
+  135          | SECOND_PERSON error Constant StatementSymbol
+  136          | SECOND_PERSON UnarticulatedConstant error
+  137          | SECOND_PERSON error StatementSymbol
+  138          | SECOND_PERSON BE Equality Value error
+  139          | SECOND_PERSON BE Equality error StatementSymbol
+  140          | SECOND_PERSON BE error Value StatementSymbol
+  141          | SECOND_PERSON error Equality Value StatementSymbol
+
+  142 StatementSymbol: EXCLAMATION_MARK
+  143                | PERIOD
+
+  144 String: StringSymbol
+  145       | String StringSymbol
+
+  146 StringSymbol: ARTICLE
+  147             | BE
+  148             | CHARACTER
+  149             | FIRST_PERSON
+  150             | FIRST_PERSON_POSSESSIVE
+  151             | FIRST_PERSON_REFLEXIVE
+  152             | NEGATIVE_ADJECTIVE
+  153             | NEGATIVE_COMPARATIVE
+  154             | NEGATIVE_NOUN
+  155             | NEUTRAL_ADJECTIVE
+  156             | NEUTRAL_NOUN
+  157             | NOTHING
+  158             | POSITIVE_ADJECTIVE
+  159             | POSITIVE_COMPARATIVE
+  160             | POSITIVE_NOUN
+  161             | SECOND_PERSON
+  162             | SECOND_PERSON_POSSESSIVE
+  163             | SECOND_PERSON_REFLEXIVE
+  164             | THIRD_PERSON_POSSESSIVE
+  165             | COMMA
+  166             | AND
+  167             | AS
+  168             | ENTER
+  169             | EXEUNT
+  170             | EXIT
+  171             | HEART
+  172             | IF_NOT
+  173             | IF_SO
+  174             | LESS
+  175             | LET_US
+  176             | LISTEN_TO
+  177             | MIND
+  178             | MORE
+  179             | NOT
+  180             | OPEN
+  181             | PROCEED_TO
+  182             | RECALL
+  183             | REMEMBER
+  184             | RETURN_TO
+  185             | SPEAK
+  186             | THAN
+  187             | THE_CUBE_OF
+  188             | THE_DIFFERENCE_BETWEEN
+  189             | THE_FACTORIAL_OF
+  190             | THE_PRODUCT_OF
+  191             | THE_QUOTIENT_BETWEEN
+  192             | THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN
+  193             | THE_SQUARE_OF
+  194             | THE_SQUARE_ROOT_OF
+  195             | THE_SUM_OF
+  196             | TWICE
+  197             | WE_MUST
+  198             | WE_SHALL
+  199             | ACT_ROMAN
+  200             | SCENE_ROMAN
+  201             | ROMAN_NUMBER
+  202             | NONMATCH
+
+  203 Title: String EndSymbol
+
+  204 UnarticulatedConstant: PositiveConstant
+  205                      | NegativeConstant
+
+  206 UnaryOperator: THE_CUBE_OF
+  207              | THE_FACTORIAL_OF
+  208              | THE_SQUARE_OF
+  209              | THE_SQUARE_ROOT_OF
+  210              | TWICE
+
+  211 UnconditionalSentence: InOut
+  212                      | Jump
+  213                      | Question
+  214                      | Recall
+  215                      | Remember
+  216                      | Statement
+
+  217 Value: CHARACTER
+  218      | Constant
+  219      | Pronoun
+  220      | BinaryOperator Value AND Value
+  221      | UnaryOperator Value
+  222      | BinaryOperator Value AND error
+  223      | BinaryOperator Value error Value
+  224      | BinaryOperator error AND Value
+  225      | UnaryOperator error
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256) 4 5 15 16 22 41 42 43 44 46 47 49 54 55 56 57 58 59 60
+    61 62 65 67 68 75 76 87 90 91 92 106 107 108 111 112 114 115 122
+    123 126 133 134 135 136 137 138 139 140 141 222 223 224 225
+ARTICLE (258) 29 146
+BE (259) 105 106 107 108 130 132 133 134 138 139 140 147
+CHARACTER (260) 14 16 19 20 36 38 74 75 76 148 217
+FIRST_PERSON (261) 101 149
+FIRST_PERSON_POSSESSIVE (262) 30 150
+FIRST_PERSON_REFLEXIVE (263) 102 151
+NEGATIVE_ADJECTIVE (264) 8 78 81 95 152
+NEGATIVE_COMPARATIVE (265) 77 153
+NEGATIVE_NOUN (266) 83 154
+NEUTRAL_ADJECTIVE (267) 7 82 98 155
+NEUTRAL_NOUN (268) 99 156
+NOTHING (269) 33 157
+POSITIVE_ADJECTIVE (270) 6 79 94 97 158
+POSITIVE_COMPARATIVE (271) 93 159
+POSITIVE_NOUN (272) 100 160
+SECOND_PERSON (273) 103 130 131 132 133 134 135 136 137 138 139 140
+    141 161
+SECOND_PERSON_POSSESSIVE (274) 31 51 52 57 58 60 61 86 162
+SECOND_PERSON_REFLEXIVE (275) 104 163
+THIRD_PERSON_POSSESSIVE (276) 32 164
+COLON (277) 3 4 74 75 121 122
+COMMA (278) 14 15 20 125 165
+EXCLAMATION_MARK (279) 142
+LEFT_BRACKET (280) 36 37 38 39 40 41 42 43 44
+PERIOD (281) 143
+QUESTION_MARK (282) 109
+RIGHT_BRACKET (283) 36 37 38 39 40 41 42 43 44
+AND (284) 19 166 220 222 224
+AS (285) 45 46 47 167
+ENTER (286) 36 37 41 168
+EXEUNT (287) 39 40 43 169
+EXIT (288) 38 42 170
+HEART (289) 50 52 56 59 61 171
+IF_NOT (290) 28 172
+IF_SO (291) 27 173
+LESS (292) 79 95 174
+LET_US (293) 69 175
+LISTEN_TO (294) 52 56 58 61 176
+MIND (295) 51 53 55 60 62 177
+MORE (296) 78 94 178
+NOT (297) 25 179
+OPEN (298) 86 87 180
+PROCEED_TO (299) 72 181
+RECALL (300) 110 111 112 182
+REMEMBER (301) 113 114 115 183
+RETURN_TO (302) 73 184
+SPEAK (303) 51 55 57 60 185
+THAN (304) 48 186
+THE_CUBE_OF (305) 187 206
+THE_DIFFERENCE_BETWEEN (306) 9 188
+THE_FACTORIAL_OF (307) 189 207
+THE_PRODUCT_OF (308) 10 190
+THE_QUOTIENT_BETWEEN (309) 11 191
+THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN (310) 12 192
+THE_SQUARE_OF (311) 193 208
+THE_SQUARE_ROOT_OF (312) 194 209
+THE_SUM_OF (313) 13 195
+TWICE (314) 196 210
+WE_MUST (315) 70 197
+WE_SHALL (316) 71 198
+ACT_ROMAN (317) 3 4 5 63 199
+SCENE_ROMAN (318) 64 121 122 123 200
+ROMAN_NUMBER (319) 201
+NONMATCH (320) 202
+
+
+Nonterminals, with rules where they appear
+
+$accept (66)
+    on left: 0
+Act (67)
+    on left: 1 2, on right: 2 88 89 91 92
+ActHeader (68)
+    on left: 3 4 5, on right: 1
+Adjective (69)
+    on left: 6 7 8, on right: 45 47
+BinaryOperator (70)
+    on left: 9 10 11 12 13, on right: 220 222 223 224
+CharacterDeclaration (71)
+    on left: 14 15 16, on right: 17 18
+CharacterDeclarationList (72)
+    on left: 17 18, on right: 18 88 90 92
+CharacterList (73)
+    on left: 19 20, on right: 20 37 39
+Comment (74)
+    on left: 21 22, on right: 3 4 5 14 15 16 121 122 123
+Comparative (75)
+    on left: 23 24, on right: 48 49
+Comparison (76)
+    on left: 25 26, on right: 105 106 108
+Conditional (77)
+    on left: 27 28, on right: 125 126
+Constant (78)
+    on left: 29 30 31 32 33, on right: 130 133 135 218
+EndSymbol (79)
+    on left: 34 35, on right: 3 5 14 15 16 121 123 203
+EnterExit (80)
+    on left: 36 37 38 39 40 41 42 43 44, on right: 117 119
+Equality (81)
+    on left: 45 46 47, on right: 84 132 138 139 141
+Inequality (82)
+    on left: 48 49, on right: 85
+InOut (83)
+    on left: 50 51 52 53 54 55 56 57 58 59 60 61 62, on right: 211
+Jump (84)
+    on left: 63 64 65, on right: 212
+JumpPhrase (85)
+    on left: 66 67 68, on right: 63 64 65
+JumpPhraseBeginning (86)
+    on left: 69 70 71, on right: 66 68
+JumpPhraseEnd (87)
+    on left: 72 73, on right: 66 67
+Line (88)
+    on left: 74 75 76, on right: 118 120
+NegativeComparative (89)
+    on left: 77 78 79, on right: 23
+NegativeConstant (90)
+    on left: 80 81 82, on right: 81 82 205
+NegativeNoun (91)
+    on left: 83, on right: 80
+NonnegatedComparison (92)
+    on left: 84 85, on right: 25 26
+OpenYour (93)
+    on left: 86 87, on right: 50 53 54 59 62
+Play (94)
+    on left: 88 89 90 91 92, on right: 89 129
+PositiveComparative (95)
+    on left: 93 94 95, on right: 24
+PositiveConstant (96)
+    on left: 96 97 98, on right: 97 98 204
+PositiveNoun (97)
+    on left: 99 100, on right: 96
+Pronoun (98)
+    on left: 101 102 103 104, on right: 219
+Question (99)
+    on left: 105 106 107 108, on right: 213
+QuestionSymbol (100)
+    on left: 109, on right: 34 105 106 107 108
+Recall (101)
+    on left: 110 111 112, on right: 214
+Remember (102)
+    on left: 113 114 115, on right: 215
+Scene (103)
+    on left: 116, on right: 1 2
+SceneContents (104)
+    on left: 117 118 119 120, on right: 116 119 120
+SceneHeader (105)
+    on left: 121 122 123, on right: 116
+Sentence (106)
+    on left: 124 125 126, on right: 127 128
+SentenceList (107)
+    on left: 127 128, on right: 74 76 128
+StartSymbol (108)
+    on left: 129, on right: 0
+Statement (109)
+    on left: 130 131 132 133 134 135 136 137 138 139 140 141, on right:
+    216
+StatementSymbol (110)
+    on left: 142 143, on right: 35 50 51 52 53 54 55 56 57 58 63 64
+    65 110 111 113 114 130 131 132 134 135 137 139 140 141
+String (111)
+    on left: 144 145, on right: 21 110 112 145 203
+StringSymbol (112)
+    on left: 146 147 148 149 150 151 152 153 154 155 156 157 158 159
+    160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175
+    176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191
+    192 193 194 195 196 197 198 199 200 201 202, on right: 144 145
+Title (113)
+    on left: 203, on right: 88 90 91
+UnarticulatedConstant (114)
+    on left: 204 205, on right: 29 30 31 32 131 136
+UnaryOperator (115)
+    on left: 206 207 208 209 210, on right: 221 225
+UnconditionalSentence (116)
+    on left: 211 212 213 214 215 216, on right: 124 125 126
+Value (117)
+    on left: 217 218 219 220 221 222 223 224 225, on right: 105 106
+    107 108 113 115 132 138 140 141 220 221 222 223 224
+
+
+State 0
+
+    0 $accept: . StartSymbol $end
+
+    error                                  shift, and go to state 1
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    Play          go to state 59
+    StartSymbol   go to state 60
+    String        go to state 61
+    StringSymbol  go to state 62
+    Title         go to state 63
+
+
+State 1
+
+   92 Play: error . CharacterDeclarationList Act
+
+    error      shift, and go to state 64
+    CHARACTER  shift, and go to state 65
+
+    CharacterDeclaration      go to state 66
+    CharacterDeclarationList  go to state 67
+
+
+State 2
+
+  146 StringSymbol: ARTICLE .
+
+    $default  reduce using rule 146 (StringSymbol)
+
+
+State 3
+
+  147 StringSymbol: BE .
+
+    $default  reduce using rule 147 (StringSymbol)
+
+
+State 4
+
+  148 StringSymbol: CHARACTER .
+
+    $default  reduce using rule 148 (StringSymbol)
+
+
+State 5
+
+  149 StringSymbol: FIRST_PERSON .
+
+    $default  reduce using rule 149 (StringSymbol)
+
+
+State 6
+
+  150 StringSymbol: FIRST_PERSON_POSSESSIVE .
+
+    $default  reduce using rule 150 (StringSymbol)
+
+
+State 7
+
+  151 StringSymbol: FIRST_PERSON_REFLEXIVE .
+
+    $default  reduce using rule 151 (StringSymbol)
+
+
+State 8
+
+  152 StringSymbol: NEGATIVE_ADJECTIVE .
+
+    $default  reduce using rule 152 (StringSymbol)
+
+
+State 9
+
+  153 StringSymbol: NEGATIVE_COMPARATIVE .
+
+    $default  reduce using rule 153 (StringSymbol)
+
+
+State 10
+
+  154 StringSymbol: NEGATIVE_NOUN .
+
+    $default  reduce using rule 154 (StringSymbol)
+
+
+State 11
+
+  155 StringSymbol: NEUTRAL_ADJECTIVE .
+
+    $default  reduce using rule 155 (StringSymbol)
+
+
+State 12
+
+  156 StringSymbol: NEUTRAL_NOUN .
+
+    $default  reduce using rule 156 (StringSymbol)
+
+
+State 13
+
+  157 StringSymbol: NOTHING .
+
+    $default  reduce using rule 157 (StringSymbol)
+
+
+State 14
+
+  158 StringSymbol: POSITIVE_ADJECTIVE .
+
+    $default  reduce using rule 158 (StringSymbol)
+
+
+State 15
+
+  159 StringSymbol: POSITIVE_COMPARATIVE .
+
+    $default  reduce using rule 159 (StringSymbol)
+
+
+State 16
+
+  160 StringSymbol: POSITIVE_NOUN .
+
+    $default  reduce using rule 160 (StringSymbol)
+
+
+State 17
+
+  161 StringSymbol: SECOND_PERSON .
+
+    $default  reduce using rule 161 (StringSymbol)
+
+
+State 18
+
+  162 StringSymbol: SECOND_PERSON_POSSESSIVE .
+
+    $default  reduce using rule 162 (StringSymbol)
+
+
+State 19
+
+  163 StringSymbol: SECOND_PERSON_REFLEXIVE .
+
+    $default  reduce using rule 163 (StringSymbol)
+
+
+State 20
+
+  164 StringSymbol: THIRD_PERSON_POSSESSIVE .
+
+    $default  reduce using rule 164 (StringSymbol)
+
+
+State 21
+
+  165 StringSymbol: COMMA .
+
+    $default  reduce using rule 165 (StringSymbol)
+
+
+State 22
+
+  166 StringSymbol: AND .
+
+    $default  reduce using rule 166 (StringSymbol)
+
+
+State 23
+
+  167 StringSymbol: AS .
+
+    $default  reduce using rule 167 (StringSymbol)
+
+
+State 24
+
+  168 StringSymbol: ENTER .
+
+    $default  reduce using rule 168 (StringSymbol)
+
+
+State 25
+
+  169 StringSymbol: EXEUNT .
+
+    $default  reduce using rule 169 (StringSymbol)
+
+
+State 26
+
+  170 StringSymbol: EXIT .
+
+    $default  reduce using rule 170 (StringSymbol)
+
+
+State 27
+
+  171 StringSymbol: HEART .
+
+    $default  reduce using rule 171 (StringSymbol)
+
+
+State 28
+
+  172 StringSymbol: IF_NOT .
+
+    $default  reduce using rule 172 (StringSymbol)
+
+
+State 29
+
+  173 StringSymbol: IF_SO .
+
+    $default  reduce using rule 173 (StringSymbol)
+
+
+State 30
+
+  174 StringSymbol: LESS .
+
+    $default  reduce using rule 174 (StringSymbol)
+
+
+State 31
+
+  175 StringSymbol: LET_US .
+
+    $default  reduce using rule 175 (StringSymbol)
+
+
+State 32
+
+  176 StringSymbol: LISTEN_TO .
+
+    $default  reduce using rule 176 (StringSymbol)
+
+
+State 33
+
+  177 StringSymbol: MIND .
+
+    $default  reduce using rule 177 (StringSymbol)
+
+
+State 34
+
+  178 StringSymbol: MORE .
+
+    $default  reduce using rule 178 (StringSymbol)
+
+
+State 35
+
+  179 StringSymbol: NOT .
+
+    $default  reduce using rule 179 (StringSymbol)
+
+
+State 36
+
+  180 StringSymbol: OPEN .
+
+    $default  reduce using rule 180 (StringSymbol)
+
+
+State 37
+
+  181 StringSymbol: PROCEED_TO .
+
+    $default  reduce using rule 181 (StringSymbol)
+
+
+State 38
+
+  182 StringSymbol: RECALL .
+
+    $default  reduce using rule 182 (StringSymbol)
+
+
+State 39
+
+  183 StringSymbol: REMEMBER .
+
+    $default  reduce using rule 183 (StringSymbol)
+
+
+State 40
+
+  184 StringSymbol: RETURN_TO .
+
+    $default  reduce using rule 184 (StringSymbol)
+
+
+State 41
+
+  185 StringSymbol: SPEAK .
+
+    $default  reduce using rule 185 (StringSymbol)
+
+
+State 42
+
+  186 StringSymbol: THAN .
+
+    $default  reduce using rule 186 (StringSymbol)
+
+
+State 43
+
+  187 StringSymbol: THE_CUBE_OF .
+
+    $default  reduce using rule 187 (StringSymbol)
+
+
+State 44
+
+  188 StringSymbol: THE_DIFFERENCE_BETWEEN .
+
+    $default  reduce using rule 188 (StringSymbol)
+
+
+State 45
+
+  189 StringSymbol: THE_FACTORIAL_OF .
+
+    $default  reduce using rule 189 (StringSymbol)
+
+
+State 46
+
+  190 StringSymbol: THE_PRODUCT_OF .
+
+    $default  reduce using rule 190 (StringSymbol)
+
+
+State 47
+
+  191 StringSymbol: THE_QUOTIENT_BETWEEN .
+
+    $default  reduce using rule 191 (StringSymbol)
+
+
+State 48
+
+  192 StringSymbol: THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN .
+
+    $default  reduce using rule 192 (StringSymbol)
+
+
+State 49
+
+  193 StringSymbol: THE_SQUARE_OF .
+
+    $default  reduce using rule 193 (StringSymbol)
+
+
+State 50
+
+  194 StringSymbol: THE_SQUARE_ROOT_OF .
+
+    $default  reduce using rule 194 (StringSymbol)
+
+
+State 51
+
+  195 StringSymbol: THE_SUM_OF .
+
+    $default  reduce using rule 195 (StringSymbol)
+
+
+State 52
+
+  196 StringSymbol: TWICE .
+
+    $default  reduce using rule 196 (StringSymbol)
+
+
+State 53
+
+  197 StringSymbol: WE_MUST .
+
+    $default  reduce using rule 197 (StringSymbol)
+
+
+State 54
+
+  198 StringSymbol: WE_SHALL .
+
+    $default  reduce using rule 198 (StringSymbol)
+
+
+State 55
+
+  199 StringSymbol: ACT_ROMAN .
+
+    $default  reduce using rule 199 (StringSymbol)
+
+
+State 56
+
+  200 StringSymbol: SCENE_ROMAN .
+
+    $default  reduce using rule 200 (StringSymbol)
+
+
+State 57
+
+  201 StringSymbol: ROMAN_NUMBER .
+
+    $default  reduce using rule 201 (StringSymbol)
+
+
+State 58
+
+  202 StringSymbol: NONMATCH .
+
+    $default  reduce using rule 202 (StringSymbol)
+
+
+State 59
+
+   89 Play: Play . Act
+  129 StartSymbol: Play .
+
+    ACT_ROMAN  shift, and go to state 68
+
+    $default  reduce using rule 129 (StartSymbol)
+
+    Act        go to state 69
+    ActHeader  go to state 70
+
+
+State 60
+
+    0 $accept: StartSymbol . $end
+
+    $end  shift, and go to state 71
+
+
+State 61
+
+  145 String: String . StringSymbol
+  203 Title: String . EndSymbol
+
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    EXCLAMATION_MARK                       shift, and go to state 72
+    PERIOD                                 shift, and go to state 73
+    QUESTION_MARK                          shift, and go to state 74
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    EndSymbol        go to state 75
+    QuestionSymbol   go to state 76
+    StatementSymbol  go to state 77
+    StringSymbol     go to state 78
+
+
+State 62
+
+  144 String: StringSymbol .
+
+    $default  reduce using rule 144 (String)
+
+
+State 63
+
+   88 Play: Title . CharacterDeclarationList Act
+   90     | Title . CharacterDeclarationList error
+   91     | Title . error Act
+
+    error      shift, and go to state 79
+    CHARACTER  shift, and go to state 65
+
+    CharacterDeclaration      go to state 66
+    CharacterDeclarationList  go to state 80
+
+
+State 64
+
+   15 CharacterDeclaration: error . COMMA Comment EndSymbol
+
+    COMMA  shift, and go to state 81
+
+
+State 65
+
+   14 CharacterDeclaration: CHARACTER . COMMA Comment EndSymbol
+   16                     | CHARACTER . error Comment EndSymbol
+
+    error  shift, and go to state 82
+    COMMA  shift, and go to state 83
+
+
+State 66
+
+   17 CharacterDeclarationList: CharacterDeclaration .
+
+    $default  reduce using rule 17 (CharacterDeclarationList)
+
+
+State 67
+
+   18 CharacterDeclarationList: CharacterDeclarationList . CharacterDeclaration
+   92 Play: error CharacterDeclarationList . Act
+
+    error      shift, and go to state 64
+    CHARACTER  shift, and go to state 65
+    ACT_ROMAN  shift, and go to state 68
+
+    Act                   go to state 84
+    ActHeader             go to state 70
+    CharacterDeclaration  go to state 85
+
+
+State 68
+
+    3 ActHeader: ACT_ROMAN . COLON Comment EndSymbol
+    4          | ACT_ROMAN . COLON Comment error
+    5          | ACT_ROMAN . error Comment EndSymbol
+
+    error  shift, and go to state 86
+    COLON  shift, and go to state 87
+
+
+State 69
+
+    2 Act: Act . Scene
+   89 Play: Play Act .
+
+    SCENE_ROMAN  shift, and go to state 88
+
+    $default  reduce using rule 89 (Play)
+
+    Scene        go to state 89
+    SceneHeader  go to state 90
+
+
+State 70
+
+    1 Act: ActHeader . Scene
+
+    SCENE_ROMAN  shift, and go to state 88
+
+    Scene        go to state 91
+    SceneHeader  go to state 90
+
+
+State 71
+
+    0 $accept: StartSymbol $end .
+
+    $default  accept
+
+
+State 72
+
+  142 StatementSymbol: EXCLAMATION_MARK .
+
+    $default  reduce using rule 142 (StatementSymbol)
+
+
+State 73
+
+  143 StatementSymbol: PERIOD .
+
+    $default  reduce using rule 143 (StatementSymbol)
+
+
+State 74
+
+  109 QuestionSymbol: QUESTION_MARK .
+
+    $default  reduce using rule 109 (QuestionSymbol)
+
+
+State 75
+
+  203 Title: String EndSymbol .
+
+    $default  reduce using rule 203 (Title)
+
+
+State 76
+
+   34 EndSymbol: QuestionSymbol .
+
+    $default  reduce using rule 34 (EndSymbol)
+
+
+State 77
+
+   35 EndSymbol: StatementSymbol .
+
+    $default  reduce using rule 35 (EndSymbol)
+
+
+State 78
+
+  145 String: String StringSymbol .
+
+    $default  reduce using rule 145 (String)
+
+
+State 79
+
+   15 CharacterDeclaration: error . COMMA Comment EndSymbol
+   91 Play: Title error . Act
+
+    COMMA      shift, and go to state 81
+    ACT_ROMAN  shift, and go to state 68
+
+    Act        go to state 92
+    ActHeader  go to state 70
+
+
+State 80
+
+   18 CharacterDeclarationList: CharacterDeclarationList . CharacterDeclaration
+   88 Play: Title CharacterDeclarationList . Act
+   90     | Title CharacterDeclarationList . error
+
+    error      shift, and go to state 93
+    CHARACTER  shift, and go to state 65
+    ACT_ROMAN  shift, and go to state 68
+
+    Act                   go to state 94
+    ActHeader             go to state 70
+    CharacterDeclaration  go to state 85
+
+
+State 81
+
+   15 CharacterDeclaration: error COMMA . Comment EndSymbol
+
+    error                                  shift, and go to state 95
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    Comment       go to state 96
+    String        go to state 97
+    StringSymbol  go to state 62
+
+
+State 82
+
+   16 CharacterDeclaration: CHARACTER error . Comment EndSymbol
+
+    error                                  shift, and go to state 95
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    Comment       go to state 98
+    String        go to state 97
+    StringSymbol  go to state 62
+
+
+State 83
+
+   14 CharacterDeclaration: CHARACTER COMMA . Comment EndSymbol
+
+    error                                  shift, and go to state 95
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    Comment       go to state 99
+    String        go to state 97
+    StringSymbol  go to state 62
+
+
+State 84
+
+    2 Act: Act . Scene
+   92 Play: error CharacterDeclarationList Act .
+
+    SCENE_ROMAN  shift, and go to state 88
+
+    $default  reduce using rule 92 (Play)
+
+    Scene        go to state 89
+    SceneHeader  go to state 90
+
+
+State 85
+
+   18 CharacterDeclarationList: CharacterDeclarationList CharacterDeclaration .
+
+    $default  reduce using rule 18 (CharacterDeclarationList)
+
+
+State 86
+
+    5 ActHeader: ACT_ROMAN error . Comment EndSymbol
+
+    error                                  shift, and go to state 95
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    Comment       go to state 100
+    String        go to state 97
+    StringSymbol  go to state 62
+
+
+State 87
+
+    3 ActHeader: ACT_ROMAN COLON . Comment EndSymbol
+    4          | ACT_ROMAN COLON . Comment error
+
+    error                                  shift, and go to state 95
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    Comment       go to state 101
+    String        go to state 97
+    StringSymbol  go to state 62
+
+
+State 88
+
+  121 SceneHeader: SCENE_ROMAN . COLON Comment EndSymbol
+  122            | SCENE_ROMAN . COLON Comment error
+  123            | SCENE_ROMAN . error Comment EndSymbol
+
+    error  shift, and go to state 102
+    COLON  shift, and go to state 103
+
+
+State 89
+
+    2 Act: Act Scene .
+
+    $default  reduce using rule 2 (Act)
+
+
+State 90
+
+  116 Scene: SceneHeader . SceneContents
+
+    CHARACTER     shift, and go to state 104
+    LEFT_BRACKET  shift, and go to state 105
+
+    EnterExit      go to state 106
+    Line           go to state 107
+    SceneContents  go to state 108
+
+
+State 91
+
+    1 Act: ActHeader Scene .
+
+    $default  reduce using rule 1 (Act)
+
+
+State 92
+
+    2 Act: Act . Scene
+   91 Play: Title error Act .
+
+    SCENE_ROMAN  shift, and go to state 88
+
+    $default  reduce using rule 91 (Play)
+
+    Scene        go to state 89
+    SceneHeader  go to state 90
+
+
+State 93
+
+   15 CharacterDeclaration: error . COMMA Comment EndSymbol
+   90 Play: Title CharacterDeclarationList error .
+
+    COMMA  shift, and go to state 81
+
+    $default  reduce using rule 90 (Play)
+
+
+State 94
+
+    2 Act: Act . Scene
+   88 Play: Title CharacterDeclarationList Act .
+
+    SCENE_ROMAN  shift, and go to state 88
+
+    $default  reduce using rule 88 (Play)
+
+    Scene        go to state 89
+    SceneHeader  go to state 90
+
+
+State 95
+
+   22 Comment: error .
+
+    $default  reduce using rule 22 (Comment)
+
+
+State 96
+
+   15 CharacterDeclaration: error COMMA Comment . EndSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+    QUESTION_MARK     shift, and go to state 74
+
+    EndSymbol        go to state 109
+    QuestionSymbol   go to state 76
+    StatementSymbol  go to state 77
+
+
+State 97
+
+   21 Comment: String .
+  145 String: String . StringSymbol
+
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    $default  reduce using rule 21 (Comment)
+
+    StringSymbol  go to state 78
+
+
+State 98
+
+   16 CharacterDeclaration: CHARACTER error Comment . EndSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+    QUESTION_MARK     shift, and go to state 74
+
+    EndSymbol        go to state 110
+    QuestionSymbol   go to state 76
+    StatementSymbol  go to state 77
+
+
+State 99
+
+   14 CharacterDeclaration: CHARACTER COMMA Comment . EndSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+    QUESTION_MARK     shift, and go to state 74
+
+    EndSymbol        go to state 111
+    QuestionSymbol   go to state 76
+    StatementSymbol  go to state 77
+
+
+State 100
+
+    5 ActHeader: ACT_ROMAN error Comment . EndSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+    QUESTION_MARK     shift, and go to state 74
+
+    EndSymbol        go to state 112
+    QuestionSymbol   go to state 76
+    StatementSymbol  go to state 77
+
+
+State 101
+
+    3 ActHeader: ACT_ROMAN COLON Comment . EndSymbol
+    4          | ACT_ROMAN COLON Comment . error
+
+    error             shift, and go to state 113
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+    QUESTION_MARK     shift, and go to state 74
+
+    EndSymbol        go to state 114
+    QuestionSymbol   go to state 76
+    StatementSymbol  go to state 77
+
+
+State 102
+
+  123 SceneHeader: SCENE_ROMAN error . Comment EndSymbol
+
+    error                                  shift, and go to state 95
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    Comment       go to state 115
+    String        go to state 97
+    StringSymbol  go to state 62
+
+
+State 103
+
+  121 SceneHeader: SCENE_ROMAN COLON . Comment EndSymbol
+  122            | SCENE_ROMAN COLON . Comment error
+
+    error                                  shift, and go to state 95
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    Comment       go to state 116
+    String        go to state 97
+    StringSymbol  go to state 62
+
+
+State 104
+
+   74 Line: CHARACTER . COLON SentenceList
+   75     | CHARACTER . COLON error
+   76     | CHARACTER . error SentenceList
+
+    error  shift, and go to state 117
+    COLON  shift, and go to state 118
+
+
+State 105
+
+   36 EnterExit: LEFT_BRACKET . ENTER CHARACTER RIGHT_BRACKET
+   37          | LEFT_BRACKET . ENTER CharacterList RIGHT_BRACKET
+   38          | LEFT_BRACKET . EXIT CHARACTER RIGHT_BRACKET
+   39          | LEFT_BRACKET . EXEUNT CharacterList RIGHT_BRACKET
+   40          | LEFT_BRACKET . EXEUNT RIGHT_BRACKET
+   41          | LEFT_BRACKET . ENTER error RIGHT_BRACKET
+   42          | LEFT_BRACKET . EXIT error RIGHT_BRACKET
+   43          | LEFT_BRACKET . EXEUNT error RIGHT_BRACKET
+   44          | LEFT_BRACKET . error RIGHT_BRACKET
+
+    error   shift, and go to state 119
+    ENTER   shift, and go to state 120
+    EXEUNT  shift, and go to state 121
+    EXIT    shift, and go to state 122
+
+
+State 106
+
+  117 SceneContents: EnterExit .
+
+    $default  reduce using rule 117 (SceneContents)
+
+
+State 107
+
+  118 SceneContents: Line .
+
+    $default  reduce using rule 118 (SceneContents)
+
+
+State 108
+
+  116 Scene: SceneHeader SceneContents .
+  119 SceneContents: SceneContents . EnterExit
+  120              | SceneContents . Line
+
+    CHARACTER     shift, and go to state 104
+    LEFT_BRACKET  shift, and go to state 105
+
+    $default  reduce using rule 116 (Scene)
+
+    EnterExit  go to state 123
+    Line       go to state 124
+
+
+State 109
+
+   15 CharacterDeclaration: error COMMA Comment EndSymbol .
+
+    $default  reduce using rule 15 (CharacterDeclaration)
+
+
+State 110
+
+   16 CharacterDeclaration: CHARACTER error Comment EndSymbol .
+
+    $default  reduce using rule 16 (CharacterDeclaration)
+
+
+State 111
+
+   14 CharacterDeclaration: CHARACTER COMMA Comment EndSymbol .
+
+    $default  reduce using rule 14 (CharacterDeclaration)
+
+
+State 112
+
+    5 ActHeader: ACT_ROMAN error Comment EndSymbol .
+
+    $default  reduce using rule 5 (ActHeader)
+
+
+State 113
+
+    4 ActHeader: ACT_ROMAN COLON Comment error .
+
+    $default  reduce using rule 4 (ActHeader)
+
+
+State 114
+
+    3 ActHeader: ACT_ROMAN COLON Comment EndSymbol .
+
+    $default  reduce using rule 3 (ActHeader)
+
+
+State 115
+
+  123 SceneHeader: SCENE_ROMAN error Comment . EndSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+    QUESTION_MARK     shift, and go to state 74
+
+    EndSymbol        go to state 125
+    QuestionSymbol   go to state 76
+    StatementSymbol  go to state 77
+
+
+State 116
+
+  121 SceneHeader: SCENE_ROMAN COLON Comment . EndSymbol
+  122            | SCENE_ROMAN COLON Comment . error
+
+    error             shift, and go to state 126
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+    QUESTION_MARK     shift, and go to state 74
+
+    EndSymbol        go to state 127
+    QuestionSymbol   go to state 76
+    StatementSymbol  go to state 77
+
+
+State 117
+
+   76 Line: CHARACTER error . SentenceList
+
+    error          shift, and go to state 128
+    BE             shift, and go to state 129
+    SECOND_PERSON  shift, and go to state 130
+    IF_NOT         shift, and go to state 131
+    IF_SO          shift, and go to state 132
+    LET_US         shift, and go to state 133
+    LISTEN_TO      shift, and go to state 134
+    OPEN           shift, and go to state 135
+    RECALL         shift, and go to state 136
+    REMEMBER       shift, and go to state 137
+    SPEAK          shift, and go to state 138
+    WE_MUST        shift, and go to state 139
+    WE_SHALL       shift, and go to state 140
+
+    Conditional            go to state 141
+    InOut                  go to state 142
+    Jump                   go to state 143
+    JumpPhrase             go to state 144
+    JumpPhraseBeginning    go to state 145
+    OpenYour               go to state 146
+    Question               go to state 147
+    Recall                 go to state 148
+    Remember               go to state 149
+    Sentence               go to state 150
+    SentenceList           go to state 151
+    Statement              go to state 152
+    UnconditionalSentence  go to state 153
+
+
+State 118
+
+   74 Line: CHARACTER COLON . SentenceList
+   75     | CHARACTER COLON . error
+
+    error          shift, and go to state 154
+    BE             shift, and go to state 129
+    SECOND_PERSON  shift, and go to state 130
+    IF_NOT         shift, and go to state 131
+    IF_SO          shift, and go to state 132
+    LET_US         shift, and go to state 133
+    LISTEN_TO      shift, and go to state 134
+    OPEN           shift, and go to state 135
+    RECALL         shift, and go to state 136
+    REMEMBER       shift, and go to state 137
+    SPEAK          shift, and go to state 138
+    WE_MUST        shift, and go to state 139
+    WE_SHALL       shift, and go to state 140
+
+    Conditional            go to state 141
+    InOut                  go to state 142
+    Jump                   go to state 143
+    JumpPhrase             go to state 144
+    JumpPhraseBeginning    go to state 145
+    OpenYour               go to state 146
+    Question               go to state 147
+    Recall                 go to state 148
+    Remember               go to state 149
+    Sentence               go to state 150
+    SentenceList           go to state 155
+    Statement              go to state 152
+    UnconditionalSentence  go to state 153
+
+
+State 119
+
+   44 EnterExit: LEFT_BRACKET error . RIGHT_BRACKET
+
+    RIGHT_BRACKET  shift, and go to state 156
+
+
+State 120
+
+   36 EnterExit: LEFT_BRACKET ENTER . CHARACTER RIGHT_BRACKET
+   37          | LEFT_BRACKET ENTER . CharacterList RIGHT_BRACKET
+   41          | LEFT_BRACKET ENTER . error RIGHT_BRACKET
+
+    error      shift, and go to state 157
+    CHARACTER  shift, and go to state 158
+
+    CharacterList  go to state 159
+
+
+State 121
+
+   39 EnterExit: LEFT_BRACKET EXEUNT . CharacterList RIGHT_BRACKET
+   40          | LEFT_BRACKET EXEUNT . RIGHT_BRACKET
+   43          | LEFT_BRACKET EXEUNT . error RIGHT_BRACKET
+
+    error          shift, and go to state 160
+    CHARACTER      shift, and go to state 161
+    RIGHT_BRACKET  shift, and go to state 162
+
+    CharacterList  go to state 163
+
+
+State 122
+
+   38 EnterExit: LEFT_BRACKET EXIT . CHARACTER RIGHT_BRACKET
+   42          | LEFT_BRACKET EXIT . error RIGHT_BRACKET
+
+    error      shift, and go to state 164
+    CHARACTER  shift, and go to state 165
+
+
+State 123
+
+  119 SceneContents: SceneContents EnterExit .
+
+    $default  reduce using rule 119 (SceneContents)
+
+
+State 124
+
+  120 SceneContents: SceneContents Line .
+
+    $default  reduce using rule 120 (SceneContents)
+
+
+State 125
+
+  123 SceneHeader: SCENE_ROMAN error Comment EndSymbol .
+
+    $default  reduce using rule 123 (SceneHeader)
+
+
+State 126
+
+  122 SceneHeader: SCENE_ROMAN COLON Comment error .
+
+    $default  reduce using rule 122 (SceneHeader)
+
+
+State 127
+
+  121 SceneHeader: SCENE_ROMAN COLON Comment EndSymbol .
+
+    $default  reduce using rule 121 (SceneHeader)
+
+
+State 128
+
+   67 JumpPhrase: error . JumpPhraseEnd
+
+    PROCEED_TO  shift, and go to state 166
+    RETURN_TO   shift, and go to state 167
+
+    JumpPhraseEnd  go to state 168
+
+
+State 129
+
+  105 Question: BE . Value Comparison Value QuestionSymbol
+  106         | BE . error Comparison Value QuestionSymbol
+  107         | BE . Value error Value QuestionSymbol
+  108         | BE . Value Comparison error QuestionSymbol
+
+    error                                  shift, and go to state 169
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 194
+
+
+State 130
+
+  130 Statement: SECOND_PERSON . BE Constant StatementSymbol
+  131          | SECOND_PERSON . UnarticulatedConstant StatementSymbol
+  132          | SECOND_PERSON . BE Equality Value StatementSymbol
+  133          | SECOND_PERSON . BE Constant error
+  134          | SECOND_PERSON . BE error StatementSymbol
+  135          | SECOND_PERSON . error Constant StatementSymbol
+  136          | SECOND_PERSON . UnarticulatedConstant error
+  137          | SECOND_PERSON . error StatementSymbol
+  138          | SECOND_PERSON . BE Equality Value error
+  139          | SECOND_PERSON . BE Equality error StatementSymbol
+  140          | SECOND_PERSON . BE error Value StatementSymbol
+  141          | SECOND_PERSON . error Equality Value StatementSymbol
+
+    error               shift, and go to state 195
+    BE                  shift, and go to state 196
+    NEGATIVE_ADJECTIVE  shift, and go to state 197
+    NEGATIVE_NOUN       shift, and go to state 198
+    NEUTRAL_ADJECTIVE   shift, and go to state 199
+    NEUTRAL_NOUN        shift, and go to state 200
+    POSITIVE_ADJECTIVE  shift, and go to state 201
+    POSITIVE_NOUN       shift, and go to state 202
+
+    NegativeConstant       go to state 203
+    NegativeNoun           go to state 204
+    PositiveConstant       go to state 205
+    PositiveNoun           go to state 206
+    UnarticulatedConstant  go to state 207
+
+
+State 131
+
+   28 Conditional: IF_NOT .
+
+    $default  reduce using rule 28 (Conditional)
+
+
+State 132
+
+   27 Conditional: IF_SO .
+
+    $default  reduce using rule 27 (Conditional)
+
+
+State 133
+
+   69 JumpPhraseBeginning: LET_US .
+
+    $default  reduce using rule 69 (JumpPhraseBeginning)
+
+
+State 134
+
+   52 InOut: LISTEN_TO . SECOND_PERSON_POSSESSIVE HEART StatementSymbol
+   56      | LISTEN_TO . error HEART StatementSymbol
+   58      | LISTEN_TO . SECOND_PERSON_POSSESSIVE error StatementSymbol
+   61      | LISTEN_TO . SECOND_PERSON_POSSESSIVE HEART error
+
+    error                     shift, and go to state 208
+    SECOND_PERSON_POSSESSIVE  shift, and go to state 209
+
+
+State 135
+
+   86 OpenYour: OPEN . SECOND_PERSON_POSSESSIVE
+   87         | OPEN . error
+
+    error                     shift, and go to state 210
+    SECOND_PERSON_POSSESSIVE  shift, and go to state 211
+
+
+State 136
+
+  110 Recall: RECALL . String StatementSymbol
+  111       | RECALL . error StatementSymbol
+  112       | RECALL . String error
+
+    error                                  shift, and go to state 212
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    String        go to state 213
+    StringSymbol  go to state 62
+
+
+State 137
+
+  113 Remember: REMEMBER . Value StatementSymbol
+  114         | REMEMBER . error StatementSymbol
+  115         | REMEMBER . Value error
+
+    error                                  shift, and go to state 214
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 215
+
+
+State 138
+
+   51 InOut: SPEAK . SECOND_PERSON_POSSESSIVE MIND StatementSymbol
+   55      | SPEAK . error MIND StatementSymbol
+   57      | SPEAK . SECOND_PERSON_POSSESSIVE error StatementSymbol
+   60      | SPEAK . SECOND_PERSON_POSSESSIVE MIND error
+
+    error                     shift, and go to state 216
+    SECOND_PERSON_POSSESSIVE  shift, and go to state 217
+
+
+State 139
+
+   70 JumpPhraseBeginning: WE_MUST .
+
+    $default  reduce using rule 70 (JumpPhraseBeginning)
+
+
+State 140
+
+   71 JumpPhraseBeginning: WE_SHALL .
+
+    $default  reduce using rule 71 (JumpPhraseBeginning)
+
+
+State 141
+
+  125 Sentence: Conditional . COMMA UnconditionalSentence
+  126         | Conditional . error UnconditionalSentence
+
+    error  shift, and go to state 218
+    COMMA  shift, and go to state 219
+
+
+State 142
+
+  211 UnconditionalSentence: InOut .
+
+    $default  reduce using rule 211 (UnconditionalSentence)
+
+
+State 143
+
+  212 UnconditionalSentence: Jump .
+
+    $default  reduce using rule 212 (UnconditionalSentence)
+
+
+State 144
+
+   63 Jump: JumpPhrase . ACT_ROMAN StatementSymbol
+   64     | JumpPhrase . SCENE_ROMAN StatementSymbol
+   65     | JumpPhrase . error StatementSymbol
+
+    error        shift, and go to state 220
+    ACT_ROMAN    shift, and go to state 221
+    SCENE_ROMAN  shift, and go to state 222
+
+
+State 145
+
+   66 JumpPhrase: JumpPhraseBeginning . JumpPhraseEnd
+   68           | JumpPhraseBeginning . error
+
+    error       shift, and go to state 223
+    PROCEED_TO  shift, and go to state 166
+    RETURN_TO   shift, and go to state 167
+
+    JumpPhraseEnd  go to state 224
+
+
+State 146
+
+   50 InOut: OpenYour . HEART StatementSymbol
+   53      | OpenYour . MIND StatementSymbol
+   54      | OpenYour . error StatementSymbol
+   59      | OpenYour . HEART error
+   62      | OpenYour . MIND error
+
+    error  shift, and go to state 225
+    HEART  shift, and go to state 226
+    MIND   shift, and go to state 227
+
+
+State 147
+
+  213 UnconditionalSentence: Question .
+
+    $default  reduce using rule 213 (UnconditionalSentence)
+
+
+State 148
+
+  214 UnconditionalSentence: Recall .
+
+    $default  reduce using rule 214 (UnconditionalSentence)
+
+
+State 149
+
+  215 UnconditionalSentence: Remember .
+
+    $default  reduce using rule 215 (UnconditionalSentence)
+
+
+State 150
+
+  127 SentenceList: Sentence .
+
+    $default  reduce using rule 127 (SentenceList)
+
+
+State 151
+
+   76 Line: CHARACTER error SentenceList .
+  128 SentenceList: SentenceList . Sentence
+
+    error          shift, and go to state 128
+    BE             shift, and go to state 129
+    SECOND_PERSON  shift, and go to state 130
+    IF_NOT         shift, and go to state 131
+    IF_SO          shift, and go to state 132
+    LET_US         shift, and go to state 133
+    LISTEN_TO      shift, and go to state 134
+    OPEN           shift, and go to state 135
+    RECALL         shift, and go to state 136
+    REMEMBER       shift, and go to state 137
+    SPEAK          shift, and go to state 138
+    WE_MUST        shift, and go to state 139
+    WE_SHALL       shift, and go to state 140
+
+    $end          reduce using rule 76 (Line)
+    CHARACTER     reduce using rule 76 (Line)
+    LEFT_BRACKET  reduce using rule 76 (Line)
+    ACT_ROMAN     reduce using rule 76 (Line)
+    SCENE_ROMAN   reduce using rule 76 (Line)
+
+    Conditional            go to state 141
+    InOut                  go to state 142
+    Jump                   go to state 143
+    JumpPhrase             go to state 144
+    JumpPhraseBeginning    go to state 145
+    OpenYour               go to state 146
+    Question               go to state 147
+    Recall                 go to state 148
+    Remember               go to state 149
+    Sentence               go to state 228
+    Statement              go to state 152
+    UnconditionalSentence  go to state 153
+
+
+State 152
+
+  216 UnconditionalSentence: Statement .
+
+    $default  reduce using rule 216 (UnconditionalSentence)
+
+
+State 153
+
+  124 Sentence: UnconditionalSentence .
+
+    $default  reduce using rule 124 (Sentence)
+
+
+State 154
+
+   67 JumpPhrase: error . JumpPhraseEnd
+   75 Line: CHARACTER COLON error .
+
+    PROCEED_TO  shift, and go to state 166
+    RETURN_TO   shift, and go to state 167
+
+    $default  reduce using rule 75 (Line)
+
+    JumpPhraseEnd  go to state 168
+
+
+State 155
+
+   74 Line: CHARACTER COLON SentenceList .
+  128 SentenceList: SentenceList . Sentence
+
+    error          shift, and go to state 128
+    BE             shift, and go to state 129
+    SECOND_PERSON  shift, and go to state 130
+    IF_NOT         shift, and go to state 131
+    IF_SO          shift, and go to state 132
+    LET_US         shift, and go to state 133
+    LISTEN_TO      shift, and go to state 134
+    OPEN           shift, and go to state 135
+    RECALL         shift, and go to state 136
+    REMEMBER       shift, and go to state 137
+    SPEAK          shift, and go to state 138
+    WE_MUST        shift, and go to state 139
+    WE_SHALL       shift, and go to state 140
+
+    $end          reduce using rule 74 (Line)
+    CHARACTER     reduce using rule 74 (Line)
+    LEFT_BRACKET  reduce using rule 74 (Line)
+    ACT_ROMAN     reduce using rule 74 (Line)
+    SCENE_ROMAN   reduce using rule 74 (Line)
+
+    Conditional            go to state 141
+    InOut                  go to state 142
+    Jump                   go to state 143
+    JumpPhrase             go to state 144
+    JumpPhraseBeginning    go to state 145
+    OpenYour               go to state 146
+    Question               go to state 147
+    Recall                 go to state 148
+    Remember               go to state 149
+    Sentence               go to state 228
+    Statement              go to state 152
+    UnconditionalSentence  go to state 153
+
+
+State 156
+
+   44 EnterExit: LEFT_BRACKET error RIGHT_BRACKET .
+
+    $default  reduce using rule 44 (EnterExit)
+
+
+State 157
+
+   41 EnterExit: LEFT_BRACKET ENTER error . RIGHT_BRACKET
+
+    RIGHT_BRACKET  shift, and go to state 229
+
+
+State 158
+
+   19 CharacterList: CHARACTER . AND CHARACTER
+   20              | CHARACTER . COMMA CharacterList
+   36 EnterExit: LEFT_BRACKET ENTER CHARACTER . RIGHT_BRACKET
+
+    COMMA          shift, and go to state 230
+    RIGHT_BRACKET  shift, and go to state 231
+    AND            shift, and go to state 232
+
+
+State 159
+
+   37 EnterExit: LEFT_BRACKET ENTER CharacterList . RIGHT_BRACKET
+
+    RIGHT_BRACKET  shift, and go to state 233
+
+
+State 160
+
+   43 EnterExit: LEFT_BRACKET EXEUNT error . RIGHT_BRACKET
+
+    RIGHT_BRACKET  shift, and go to state 234
+
+
+State 161
+
+   19 CharacterList: CHARACTER . AND CHARACTER
+   20              | CHARACTER . COMMA CharacterList
+
+    COMMA  shift, and go to state 230
+    AND    shift, and go to state 232
+
+
+State 162
+
+   40 EnterExit: LEFT_BRACKET EXEUNT RIGHT_BRACKET .
+
+    $default  reduce using rule 40 (EnterExit)
+
+
+State 163
+
+   39 EnterExit: LEFT_BRACKET EXEUNT CharacterList . RIGHT_BRACKET
+
+    RIGHT_BRACKET  shift, and go to state 235
+
+
+State 164
+
+   42 EnterExit: LEFT_BRACKET EXIT error . RIGHT_BRACKET
+
+    RIGHT_BRACKET  shift, and go to state 236
+
+
+State 165
+
+   38 EnterExit: LEFT_BRACKET EXIT CHARACTER . RIGHT_BRACKET
+
+    RIGHT_BRACKET  shift, and go to state 237
+
+
+State 166
+
+   72 JumpPhraseEnd: PROCEED_TO .
+
+    $default  reduce using rule 72 (JumpPhraseEnd)
+
+
+State 167
+
+   73 JumpPhraseEnd: RETURN_TO .
+
+    $default  reduce using rule 73 (JumpPhraseEnd)
+
+
+State 168
+
+   67 JumpPhrase: error JumpPhraseEnd .
+
+    $default  reduce using rule 67 (JumpPhrase)
+
+
+State 169
+
+  106 Question: BE error . Comparison Value QuestionSymbol
+
+    NEGATIVE_COMPARATIVE  shift, and go to state 238
+    POSITIVE_COMPARATIVE  shift, and go to state 239
+    AS                    shift, and go to state 240
+    LESS                  shift, and go to state 241
+    MORE                  shift, and go to state 242
+    NOT                   shift, and go to state 243
+
+    Comparative           go to state 244
+    Comparison            go to state 245
+    Equality              go to state 246
+    Inequality            go to state 247
+    NegativeComparative   go to state 248
+    NonnegatedComparison  go to state 249
+    PositiveComparative   go to state 250
+
+
+State 170
+
+   29 Constant: ARTICLE . UnarticulatedConstant
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 197
+    NEGATIVE_NOUN       shift, and go to state 198
+    NEUTRAL_ADJECTIVE   shift, and go to state 199
+    NEUTRAL_NOUN        shift, and go to state 200
+    POSITIVE_ADJECTIVE  shift, and go to state 201
+    POSITIVE_NOUN       shift, and go to state 202
+
+    NegativeConstant       go to state 203
+    NegativeNoun           go to state 204
+    PositiveConstant       go to state 205
+    PositiveNoun           go to state 206
+    UnarticulatedConstant  go to state 251
+
+
+State 171
+
+  217 Value: CHARACTER .
+
+    $default  reduce using rule 217 (Value)
+
+
+State 172
+
+  101 Pronoun: FIRST_PERSON .
+
+    $default  reduce using rule 101 (Pronoun)
+
+
+State 173
+
+   30 Constant: FIRST_PERSON_POSSESSIVE . UnarticulatedConstant
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 197
+    NEGATIVE_NOUN       shift, and go to state 198
+    NEUTRAL_ADJECTIVE   shift, and go to state 199
+    NEUTRAL_NOUN        shift, and go to state 200
+    POSITIVE_ADJECTIVE  shift, and go to state 201
+    POSITIVE_NOUN       shift, and go to state 202
+
+    NegativeConstant       go to state 203
+    NegativeNoun           go to state 204
+    PositiveConstant       go to state 205
+    PositiveNoun           go to state 206
+    UnarticulatedConstant  go to state 252
+
+
+State 174
+
+  102 Pronoun: FIRST_PERSON_REFLEXIVE .
+
+    $default  reduce using rule 102 (Pronoun)
+
+
+State 175
+
+   33 Constant: NOTHING .
+
+    $default  reduce using rule 33 (Constant)
+
+
+State 176
+
+  103 Pronoun: SECOND_PERSON .
+
+    $default  reduce using rule 103 (Pronoun)
+
+
+State 177
+
+   31 Constant: SECOND_PERSON_POSSESSIVE . UnarticulatedConstant
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 197
+    NEGATIVE_NOUN       shift, and go to state 198
+    NEUTRAL_ADJECTIVE   shift, and go to state 199
+    NEUTRAL_NOUN        shift, and go to state 200
+    POSITIVE_ADJECTIVE  shift, and go to state 201
+    POSITIVE_NOUN       shift, and go to state 202
+
+    NegativeConstant       go to state 203
+    NegativeNoun           go to state 204
+    PositiveConstant       go to state 205
+    PositiveNoun           go to state 206
+    UnarticulatedConstant  go to state 253
+
+
+State 178
+
+  104 Pronoun: SECOND_PERSON_REFLEXIVE .
+
+    $default  reduce using rule 104 (Pronoun)
+
+
+State 179
+
+   32 Constant: THIRD_PERSON_POSSESSIVE . UnarticulatedConstant
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 197
+    NEGATIVE_NOUN       shift, and go to state 198
+    NEUTRAL_ADJECTIVE   shift, and go to state 199
+    NEUTRAL_NOUN        shift, and go to state 200
+    POSITIVE_ADJECTIVE  shift, and go to state 201
+    POSITIVE_NOUN       shift, and go to state 202
+
+    NegativeConstant       go to state 203
+    NegativeNoun           go to state 204
+    PositiveConstant       go to state 205
+    PositiveNoun           go to state 206
+    UnarticulatedConstant  go to state 254
+
+
+State 180
+
+  206 UnaryOperator: THE_CUBE_OF .
+
+    $default  reduce using rule 206 (UnaryOperator)
+
+
+State 181
+
+    9 BinaryOperator: THE_DIFFERENCE_BETWEEN .
+
+    $default  reduce using rule 9 (BinaryOperator)
+
+
+State 182
+
+  207 UnaryOperator: THE_FACTORIAL_OF .
+
+    $default  reduce using rule 207 (UnaryOperator)
+
+
+State 183
+
+   10 BinaryOperator: THE_PRODUCT_OF .
+
+    $default  reduce using rule 10 (BinaryOperator)
+
+
+State 184
+
+   11 BinaryOperator: THE_QUOTIENT_BETWEEN .
+
+    $default  reduce using rule 11 (BinaryOperator)
+
+
+State 185
+
+   12 BinaryOperator: THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN .
+
+    $default  reduce using rule 12 (BinaryOperator)
+
+
+State 186
+
+  208 UnaryOperator: THE_SQUARE_OF .
+
+    $default  reduce using rule 208 (UnaryOperator)
+
+
+State 187
+
+  209 UnaryOperator: THE_SQUARE_ROOT_OF .
+
+    $default  reduce using rule 209 (UnaryOperator)
+
+
+State 188
+
+   13 BinaryOperator: THE_SUM_OF .
+
+    $default  reduce using rule 13 (BinaryOperator)
+
+
+State 189
+
+  210 UnaryOperator: TWICE .
+
+    $default  reduce using rule 210 (UnaryOperator)
+
+
+State 190
+
+  220 Value: BinaryOperator . Value AND Value
+  222      | BinaryOperator . Value AND error
+  223      | BinaryOperator . Value error Value
+  224      | BinaryOperator . error AND Value
+
+    error                                  shift, and go to state 255
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 256
+
+
+State 191
+
+  218 Value: Constant .
+
+    $default  reduce using rule 218 (Value)
+
+
+State 192
+
+  219 Value: Pronoun .
+
+    $default  reduce using rule 219 (Value)
+
+
+State 193
+
+  221 Value: UnaryOperator . Value
+  225      | UnaryOperator . error
+
+    error                                  shift, and go to state 257
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 258
+
+
+State 194
+
+  105 Question: BE Value . Comparison Value QuestionSymbol
+  107         | BE Value . error Value QuestionSymbol
+  108         | BE Value . Comparison error QuestionSymbol
+
+    error                 shift, and go to state 259
+    NEGATIVE_COMPARATIVE  shift, and go to state 238
+    POSITIVE_COMPARATIVE  shift, and go to state 239
+    AS                    shift, and go to state 240
+    LESS                  shift, and go to state 241
+    MORE                  shift, and go to state 242
+    NOT                   shift, and go to state 243
+
+    Comparative           go to state 244
+    Comparison            go to state 260
+    Equality              go to state 246
+    Inequality            go to state 247
+    NegativeComparative   go to state 248
+    NonnegatedComparison  go to state 249
+    PositiveComparative   go to state 250
+
+
+State 195
+
+  135 Statement: SECOND_PERSON error . Constant StatementSymbol
+  137          | SECOND_PERSON error . StatementSymbol
+  141          | SECOND_PERSON error . Equality Value StatementSymbol
+
+    ARTICLE                   shift, and go to state 170
+    FIRST_PERSON_POSSESSIVE   shift, and go to state 173
+    NOTHING                   shift, and go to state 175
+    SECOND_PERSON_POSSESSIVE  shift, and go to state 177
+    THIRD_PERSON_POSSESSIVE   shift, and go to state 179
+    EXCLAMATION_MARK          shift, and go to state 72
+    PERIOD                    shift, and go to state 73
+    AS                        shift, and go to state 240
+
+    Constant         go to state 261
+    Equality         go to state 262
+    StatementSymbol  go to state 263
+
+
+State 196
+
+  130 Statement: SECOND_PERSON BE . Constant StatementSymbol
+  132          | SECOND_PERSON BE . Equality Value StatementSymbol
+  133          | SECOND_PERSON BE . Constant error
+  134          | SECOND_PERSON BE . error StatementSymbol
+  138          | SECOND_PERSON BE . Equality Value error
+  139          | SECOND_PERSON BE . Equality error StatementSymbol
+  140          | SECOND_PERSON BE . error Value StatementSymbol
+
+    error                     shift, and go to state 264
+    ARTICLE                   shift, and go to state 170
+    FIRST_PERSON_POSSESSIVE   shift, and go to state 173
+    NOTHING                   shift, and go to state 175
+    SECOND_PERSON_POSSESSIVE  shift, and go to state 177
+    THIRD_PERSON_POSSESSIVE   shift, and go to state 179
+    AS                        shift, and go to state 240
+
+    Constant  go to state 265
+    Equality  go to state 266
+
+
+State 197
+
+   81 NegativeConstant: NEGATIVE_ADJECTIVE . NegativeConstant
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 197
+    NEGATIVE_NOUN       shift, and go to state 198
+    NEUTRAL_ADJECTIVE   shift, and go to state 267
+
+    NegativeConstant  go to state 268
+    NegativeNoun      go to state 204
+
+
+State 198
+
+   83 NegativeNoun: NEGATIVE_NOUN .
+
+    $default  reduce using rule 83 (NegativeNoun)
+
+
+State 199
+
+   82 NegativeConstant: NEUTRAL_ADJECTIVE . NegativeConstant
+   98 PositiveConstant: NEUTRAL_ADJECTIVE . PositiveConstant
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 197
+    NEGATIVE_NOUN       shift, and go to state 198
+    NEUTRAL_ADJECTIVE   shift, and go to state 199
+    NEUTRAL_NOUN        shift, and go to state 200
+    POSITIVE_ADJECTIVE  shift, and go to state 201
+    POSITIVE_NOUN       shift, and go to state 202
+
+    NegativeConstant  go to state 269
+    NegativeNoun      go to state 204
+    PositiveConstant  go to state 270
+    PositiveNoun      go to state 206
+
+
+State 200
+
+   99 PositiveNoun: NEUTRAL_NOUN .
+
+    $default  reduce using rule 99 (PositiveNoun)
+
+
+State 201
+
+   97 PositiveConstant: POSITIVE_ADJECTIVE . PositiveConstant
+
+    NEUTRAL_ADJECTIVE   shift, and go to state 271
+    NEUTRAL_NOUN        shift, and go to state 200
+    POSITIVE_ADJECTIVE  shift, and go to state 201
+    POSITIVE_NOUN       shift, and go to state 202
+
+    PositiveConstant  go to state 272
+    PositiveNoun      go to state 206
+
+
+State 202
+
+  100 PositiveNoun: POSITIVE_NOUN .
+
+    $default  reduce using rule 100 (PositiveNoun)
+
+
+State 203
+
+  205 UnarticulatedConstant: NegativeConstant .
+
+    $default  reduce using rule 205 (UnarticulatedConstant)
+
+
+State 204
+
+   80 NegativeConstant: NegativeNoun .
+
+    $default  reduce using rule 80 (NegativeConstant)
+
+
+State 205
+
+  204 UnarticulatedConstant: PositiveConstant .
+
+    $default  reduce using rule 204 (UnarticulatedConstant)
+
+
+State 206
+
+   96 PositiveConstant: PositiveNoun .
+
+    $default  reduce using rule 96 (PositiveConstant)
+
+
+State 207
+
+  131 Statement: SECOND_PERSON UnarticulatedConstant . StatementSymbol
+  136          | SECOND_PERSON UnarticulatedConstant . error
+
+    error             shift, and go to state 273
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 274
+
+
+State 208
+
+   56 InOut: LISTEN_TO error . HEART StatementSymbol
+
+    HEART  shift, and go to state 275
+
+
+State 209
+
+   52 InOut: LISTEN_TO SECOND_PERSON_POSSESSIVE . HEART StatementSymbol
+   58      | LISTEN_TO SECOND_PERSON_POSSESSIVE . error StatementSymbol
+   61      | LISTEN_TO SECOND_PERSON_POSSESSIVE . HEART error
+
+    error  shift, and go to state 276
+    HEART  shift, and go to state 277
+
+
+State 210
+
+   87 OpenYour: OPEN error .
+
+    $default  reduce using rule 87 (OpenYour)
+
+
+State 211
+
+   86 OpenYour: OPEN SECOND_PERSON_POSSESSIVE .
+
+    $default  reduce using rule 86 (OpenYour)
+
+
+State 212
+
+  111 Recall: RECALL error . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 278
+
+
+State 213
+
+  110 Recall: RECALL String . StatementSymbol
+  112       | RECALL String . error
+  145 String: String . StringSymbol
+
+    error                                  shift, and go to state 279
+    ARTICLE                                shift, and go to state 2
+    BE                                     shift, and go to state 3
+    CHARACTER                              shift, and go to state 4
+    FIRST_PERSON                           shift, and go to state 5
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 6
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 7
+    NEGATIVE_ADJECTIVE                     shift, and go to state 8
+    NEGATIVE_COMPARATIVE                   shift, and go to state 9
+    NEGATIVE_NOUN                          shift, and go to state 10
+    NEUTRAL_ADJECTIVE                      shift, and go to state 11
+    NEUTRAL_NOUN                           shift, and go to state 12
+    NOTHING                                shift, and go to state 13
+    POSITIVE_ADJECTIVE                     shift, and go to state 14
+    POSITIVE_COMPARATIVE                   shift, and go to state 15
+    POSITIVE_NOUN                          shift, and go to state 16
+    SECOND_PERSON                          shift, and go to state 17
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 18
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 19
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 20
+    COMMA                                  shift, and go to state 21
+    EXCLAMATION_MARK                       shift, and go to state 72
+    PERIOD                                 shift, and go to state 73
+    AND                                    shift, and go to state 22
+    AS                                     shift, and go to state 23
+    ENTER                                  shift, and go to state 24
+    EXEUNT                                 shift, and go to state 25
+    EXIT                                   shift, and go to state 26
+    HEART                                  shift, and go to state 27
+    IF_NOT                                 shift, and go to state 28
+    IF_SO                                  shift, and go to state 29
+    LESS                                   shift, and go to state 30
+    LET_US                                 shift, and go to state 31
+    LISTEN_TO                              shift, and go to state 32
+    MIND                                   shift, and go to state 33
+    MORE                                   shift, and go to state 34
+    NOT                                    shift, and go to state 35
+    OPEN                                   shift, and go to state 36
+    PROCEED_TO                             shift, and go to state 37
+    RECALL                                 shift, and go to state 38
+    REMEMBER                               shift, and go to state 39
+    RETURN_TO                              shift, and go to state 40
+    SPEAK                                  shift, and go to state 41
+    THAN                                   shift, and go to state 42
+    THE_CUBE_OF                            shift, and go to state 43
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 44
+    THE_FACTORIAL_OF                       shift, and go to state 45
+    THE_PRODUCT_OF                         shift, and go to state 46
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 47
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 48
+    THE_SQUARE_OF                          shift, and go to state 49
+    THE_SQUARE_ROOT_OF                     shift, and go to state 50
+    THE_SUM_OF                             shift, and go to state 51
+    TWICE                                  shift, and go to state 52
+    WE_MUST                                shift, and go to state 53
+    WE_SHALL                               shift, and go to state 54
+    ACT_ROMAN                              shift, and go to state 55
+    SCENE_ROMAN                            shift, and go to state 56
+    ROMAN_NUMBER                           shift, and go to state 57
+    NONMATCH                               shift, and go to state 58
+
+    StatementSymbol  go to state 280
+    StringSymbol     go to state 78
+
+
+State 214
+
+  114 Remember: REMEMBER error . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 281
+
+
+State 215
+
+  113 Remember: REMEMBER Value . StatementSymbol
+  115         | REMEMBER Value . error
+
+    error             shift, and go to state 282
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 283
+
+
+State 216
+
+   55 InOut: SPEAK error . MIND StatementSymbol
+
+    MIND  shift, and go to state 284
+
+
+State 217
+
+   51 InOut: SPEAK SECOND_PERSON_POSSESSIVE . MIND StatementSymbol
+   57      | SPEAK SECOND_PERSON_POSSESSIVE . error StatementSymbol
+   60      | SPEAK SECOND_PERSON_POSSESSIVE . MIND error
+
+    error  shift, and go to state 285
+    MIND   shift, and go to state 286
+
+
+State 218
+
+  126 Sentence: Conditional error . UnconditionalSentence
+
+    error          shift, and go to state 128
+    BE             shift, and go to state 129
+    SECOND_PERSON  shift, and go to state 130
+    LET_US         shift, and go to state 133
+    LISTEN_TO      shift, and go to state 134
+    OPEN           shift, and go to state 135
+    RECALL         shift, and go to state 136
+    REMEMBER       shift, and go to state 137
+    SPEAK          shift, and go to state 138
+    WE_MUST        shift, and go to state 139
+    WE_SHALL       shift, and go to state 140
+
+    InOut                  go to state 142
+    Jump                   go to state 143
+    JumpPhrase             go to state 144
+    JumpPhraseBeginning    go to state 145
+    OpenYour               go to state 146
+    Question               go to state 147
+    Recall                 go to state 148
+    Remember               go to state 149
+    Statement              go to state 152
+    UnconditionalSentence  go to state 287
+
+
+State 219
+
+  125 Sentence: Conditional COMMA . UnconditionalSentence
+
+    error          shift, and go to state 128
+    BE             shift, and go to state 129
+    SECOND_PERSON  shift, and go to state 130
+    LET_US         shift, and go to state 133
+    LISTEN_TO      shift, and go to state 134
+    OPEN           shift, and go to state 135
+    RECALL         shift, and go to state 136
+    REMEMBER       shift, and go to state 137
+    SPEAK          shift, and go to state 138
+    WE_MUST        shift, and go to state 139
+    WE_SHALL       shift, and go to state 140
+
+    InOut                  go to state 142
+    Jump                   go to state 143
+    JumpPhrase             go to state 144
+    JumpPhraseBeginning    go to state 145
+    OpenYour               go to state 146
+    Question               go to state 147
+    Recall                 go to state 148
+    Remember               go to state 149
+    Statement              go to state 152
+    UnconditionalSentence  go to state 288
+
+
+State 220
+
+   65 Jump: JumpPhrase error . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 289
+
+
+State 221
+
+   63 Jump: JumpPhrase ACT_ROMAN . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 290
+
+
+State 222
+
+   64 Jump: JumpPhrase SCENE_ROMAN . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 291
+
+
+State 223
+
+   68 JumpPhrase: JumpPhraseBeginning error .
+
+    $default  reduce using rule 68 (JumpPhrase)
+
+
+State 224
+
+   66 JumpPhrase: JumpPhraseBeginning JumpPhraseEnd .
+
+    $default  reduce using rule 66 (JumpPhrase)
+
+
+State 225
+
+   54 InOut: OpenYour error . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 292
+
+
+State 226
+
+   50 InOut: OpenYour HEART . StatementSymbol
+   59      | OpenYour HEART . error
+
+    error             shift, and go to state 293
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 294
+
+
+State 227
+
+   53 InOut: OpenYour MIND . StatementSymbol
+   62      | OpenYour MIND . error
+
+    error             shift, and go to state 295
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 296
+
+
+State 228
+
+  128 SentenceList: SentenceList Sentence .
+
+    $default  reduce using rule 128 (SentenceList)
+
+
+State 229
+
+   41 EnterExit: LEFT_BRACKET ENTER error RIGHT_BRACKET .
+
+    $default  reduce using rule 41 (EnterExit)
+
+
+State 230
+
+   20 CharacterList: CHARACTER COMMA . CharacterList
+
+    CHARACTER  shift, and go to state 161
+
+    CharacterList  go to state 297
+
+
+State 231
+
+   36 EnterExit: LEFT_BRACKET ENTER CHARACTER RIGHT_BRACKET .
+
+    $default  reduce using rule 36 (EnterExit)
+
+
+State 232
+
+   19 CharacterList: CHARACTER AND . CHARACTER
+
+    CHARACTER  shift, and go to state 298
+
+
+State 233
+
+   37 EnterExit: LEFT_BRACKET ENTER CharacterList RIGHT_BRACKET .
+
+    $default  reduce using rule 37 (EnterExit)
+
+
+State 234
+
+   43 EnterExit: LEFT_BRACKET EXEUNT error RIGHT_BRACKET .
+
+    $default  reduce using rule 43 (EnterExit)
+
+
+State 235
+
+   39 EnterExit: LEFT_BRACKET EXEUNT CharacterList RIGHT_BRACKET .
+
+    $default  reduce using rule 39 (EnterExit)
+
+
+State 236
+
+   42 EnterExit: LEFT_BRACKET EXIT error RIGHT_BRACKET .
+
+    $default  reduce using rule 42 (EnterExit)
+
+
+State 237
+
+   38 EnterExit: LEFT_BRACKET EXIT CHARACTER RIGHT_BRACKET .
+
+    $default  reduce using rule 38 (EnterExit)
+
+
+State 238
+
+   77 NegativeComparative: NEGATIVE_COMPARATIVE .
+
+    $default  reduce using rule 77 (NegativeComparative)
+
+
+State 239
+
+   93 PositiveComparative: POSITIVE_COMPARATIVE .
+
+    $default  reduce using rule 93 (PositiveComparative)
+
+
+State 240
+
+   45 Equality: AS . Adjective AS
+   46         | AS . error AS
+   47         | AS . Adjective error
+
+    error               shift, and go to state 299
+    NEGATIVE_ADJECTIVE  shift, and go to state 300
+    NEUTRAL_ADJECTIVE   shift, and go to state 301
+    POSITIVE_ADJECTIVE  shift, and go to state 302
+
+    Adjective  go to state 303
+
+
+State 241
+
+   79 NegativeComparative: LESS . POSITIVE_ADJECTIVE
+   95 PositiveComparative: LESS . NEGATIVE_ADJECTIVE
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 304
+    POSITIVE_ADJECTIVE  shift, and go to state 305
+
+
+State 242
+
+   78 NegativeComparative: MORE . NEGATIVE_ADJECTIVE
+   94 PositiveComparative: MORE . POSITIVE_ADJECTIVE
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 306
+    POSITIVE_ADJECTIVE  shift, and go to state 307
+
+
+State 243
+
+   25 Comparison: NOT . NonnegatedComparison
+
+    NEGATIVE_COMPARATIVE  shift, and go to state 238
+    POSITIVE_COMPARATIVE  shift, and go to state 239
+    AS                    shift, and go to state 240
+    LESS                  shift, and go to state 241
+    MORE                  shift, and go to state 242
+
+    Comparative           go to state 244
+    Equality              go to state 246
+    Inequality            go to state 247
+    NegativeComparative   go to state 248
+    NonnegatedComparison  go to state 308
+    PositiveComparative   go to state 250
+
+
+State 244
+
+   48 Inequality: Comparative . THAN
+   49           | Comparative . error
+
+    error  shift, and go to state 309
+    THAN   shift, and go to state 310
+
+
+State 245
+
+  106 Question: BE error Comparison . Value QuestionSymbol
+
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 311
+
+
+State 246
+
+   84 NonnegatedComparison: Equality .
+
+    $default  reduce using rule 84 (NonnegatedComparison)
+
+
+State 247
+
+   85 NonnegatedComparison: Inequality .
+
+    $default  reduce using rule 85 (NonnegatedComparison)
+
+
+State 248
+
+   23 Comparative: NegativeComparative .
+
+    $default  reduce using rule 23 (Comparative)
+
+
+State 249
+
+   26 Comparison: NonnegatedComparison .
+
+    $default  reduce using rule 26 (Comparison)
+
+
+State 250
+
+   24 Comparative: PositiveComparative .
+
+    $default  reduce using rule 24 (Comparative)
+
+
+State 251
+
+   29 Constant: ARTICLE UnarticulatedConstant .
+
+    $default  reduce using rule 29 (Constant)
+
+
+State 252
+
+   30 Constant: FIRST_PERSON_POSSESSIVE UnarticulatedConstant .
+
+    $default  reduce using rule 30 (Constant)
+
+
+State 253
+
+   31 Constant: SECOND_PERSON_POSSESSIVE UnarticulatedConstant .
+
+    $default  reduce using rule 31 (Constant)
+
+
+State 254
+
+   32 Constant: THIRD_PERSON_POSSESSIVE UnarticulatedConstant .
+
+    $default  reduce using rule 32 (Constant)
+
+
+State 255
+
+  224 Value: BinaryOperator error . AND Value
+
+    AND  shift, and go to state 312
+
+
+State 256
+
+  220 Value: BinaryOperator Value . AND Value
+  222      | BinaryOperator Value . AND error
+  223      | BinaryOperator Value . error Value
+
+    error  shift, and go to state 313
+    AND    shift, and go to state 314
+
+
+State 257
+
+  225 Value: UnaryOperator error .
+
+    $default  reduce using rule 225 (Value)
+
+
+State 258
+
+  221 Value: UnaryOperator Value .
+
+    $default  reduce using rule 221 (Value)
+
+
+State 259
+
+  107 Question: BE Value error . Value QuestionSymbol
+
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 315
+
+
+State 260
+
+  105 Question: BE Value Comparison . Value QuestionSymbol
+  108         | BE Value Comparison . error QuestionSymbol
+
+    error                                  shift, and go to state 316
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 317
+
+
+State 261
+
+  135 Statement: SECOND_PERSON error Constant . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 318
+
+
+State 262
+
+  141 Statement: SECOND_PERSON error Equality . Value StatementSymbol
+
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 319
+
+
+State 263
+
+  137 Statement: SECOND_PERSON error StatementSymbol .
+
+    $default  reduce using rule 137 (Statement)
+
+
+State 264
+
+  134 Statement: SECOND_PERSON BE error . StatementSymbol
+  140          | SECOND_PERSON BE error . Value StatementSymbol
+
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    EXCLAMATION_MARK                       shift, and go to state 72
+    PERIOD                                 shift, and go to state 73
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator   go to state 190
+    Constant         go to state 191
+    Pronoun          go to state 192
+    StatementSymbol  go to state 320
+    UnaryOperator    go to state 193
+    Value            go to state 321
+
+
+State 265
+
+  130 Statement: SECOND_PERSON BE Constant . StatementSymbol
+  133          | SECOND_PERSON BE Constant . error
+
+    error             shift, and go to state 322
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 323
+
+
+State 266
+
+  132 Statement: SECOND_PERSON BE Equality . Value StatementSymbol
+  138          | SECOND_PERSON BE Equality . Value error
+  139          | SECOND_PERSON BE Equality . error StatementSymbol
+
+    error                                  shift, and go to state 324
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 325
+
+
+State 267
+
+   82 NegativeConstant: NEUTRAL_ADJECTIVE . NegativeConstant
+
+    NEGATIVE_ADJECTIVE  shift, and go to state 197
+    NEGATIVE_NOUN       shift, and go to state 198
+    NEUTRAL_ADJECTIVE   shift, and go to state 267
+
+    NegativeConstant  go to state 269
+    NegativeNoun      go to state 204
+
+
+State 268
+
+   81 NegativeConstant: NEGATIVE_ADJECTIVE NegativeConstant .
+
+    $default  reduce using rule 81 (NegativeConstant)
+
+
+State 269
+
+   82 NegativeConstant: NEUTRAL_ADJECTIVE NegativeConstant .
+
+    $default  reduce using rule 82 (NegativeConstant)
+
+
+State 270
+
+   98 PositiveConstant: NEUTRAL_ADJECTIVE PositiveConstant .
+
+    $default  reduce using rule 98 (PositiveConstant)
+
+
+State 271
+
+   98 PositiveConstant: NEUTRAL_ADJECTIVE . PositiveConstant
+
+    NEUTRAL_ADJECTIVE   shift, and go to state 271
+    NEUTRAL_NOUN        shift, and go to state 200
+    POSITIVE_ADJECTIVE  shift, and go to state 201
+    POSITIVE_NOUN       shift, and go to state 202
+
+    PositiveConstant  go to state 270
+    PositiveNoun      go to state 206
+
+
+State 272
+
+   97 PositiveConstant: POSITIVE_ADJECTIVE PositiveConstant .
+
+    $default  reduce using rule 97 (PositiveConstant)
+
+
+State 273
+
+  136 Statement: SECOND_PERSON UnarticulatedConstant error .
+
+    $default  reduce using rule 136 (Statement)
+
+
+State 274
+
+  131 Statement: SECOND_PERSON UnarticulatedConstant StatementSymbol .
+
+    $default  reduce using rule 131 (Statement)
+
+
+State 275
+
+   56 InOut: LISTEN_TO error HEART . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 326
+
+
+State 276
+
+   58 InOut: LISTEN_TO SECOND_PERSON_POSSESSIVE error . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 327
+
+
+State 277
+
+   52 InOut: LISTEN_TO SECOND_PERSON_POSSESSIVE HEART . StatementSymbol
+   61      | LISTEN_TO SECOND_PERSON_POSSESSIVE HEART . error
+
+    error             shift, and go to state 328
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 329
+
+
+State 278
+
+  111 Recall: RECALL error StatementSymbol .
+
+    $default  reduce using rule 111 (Recall)
+
+
+State 279
+
+  112 Recall: RECALL String error .
+
+    $default  reduce using rule 112 (Recall)
+
+
+State 280
+
+  110 Recall: RECALL String StatementSymbol .
+
+    $default  reduce using rule 110 (Recall)
+
+
+State 281
+
+  114 Remember: REMEMBER error StatementSymbol .
+
+    $default  reduce using rule 114 (Remember)
+
+
+State 282
+
+  115 Remember: REMEMBER Value error .
+
+    $default  reduce using rule 115 (Remember)
+
+
+State 283
+
+  113 Remember: REMEMBER Value StatementSymbol .
+
+    $default  reduce using rule 113 (Remember)
+
+
+State 284
+
+   55 InOut: SPEAK error MIND . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 330
+
+
+State 285
+
+   57 InOut: SPEAK SECOND_PERSON_POSSESSIVE error . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 331
+
+
+State 286
+
+   51 InOut: SPEAK SECOND_PERSON_POSSESSIVE MIND . StatementSymbol
+   60      | SPEAK SECOND_PERSON_POSSESSIVE MIND . error
+
+    error             shift, and go to state 332
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 333
+
+
+State 287
+
+  126 Sentence: Conditional error UnconditionalSentence .
+
+    $default  reduce using rule 126 (Sentence)
+
+
+State 288
+
+  125 Sentence: Conditional COMMA UnconditionalSentence .
+
+    $default  reduce using rule 125 (Sentence)
+
+
+State 289
+
+   65 Jump: JumpPhrase error StatementSymbol .
+
+    $default  reduce using rule 65 (Jump)
+
+
+State 290
+
+   63 Jump: JumpPhrase ACT_ROMAN StatementSymbol .
+
+    $default  reduce using rule 63 (Jump)
+
+
+State 291
+
+   64 Jump: JumpPhrase SCENE_ROMAN StatementSymbol .
+
+    $default  reduce using rule 64 (Jump)
+
+
+State 292
+
+   54 InOut: OpenYour error StatementSymbol .
+
+    $default  reduce using rule 54 (InOut)
+
+
+State 293
+
+   59 InOut: OpenYour HEART error .
+
+    $default  reduce using rule 59 (InOut)
+
+
+State 294
+
+   50 InOut: OpenYour HEART StatementSymbol .
+
+    $default  reduce using rule 50 (InOut)
+
+
+State 295
+
+   62 InOut: OpenYour MIND error .
+
+    $default  reduce using rule 62 (InOut)
+
+
+State 296
+
+   53 InOut: OpenYour MIND StatementSymbol .
+
+    $default  reduce using rule 53 (InOut)
+
+
+State 297
+
+   20 CharacterList: CHARACTER COMMA CharacterList .
+
+    $default  reduce using rule 20 (CharacterList)
+
+
+State 298
+
+   19 CharacterList: CHARACTER AND CHARACTER .
+
+    $default  reduce using rule 19 (CharacterList)
+
+
+State 299
+
+   46 Equality: AS error . AS
+
+    AS  shift, and go to state 334
+
+
+State 300
+
+    8 Adjective: NEGATIVE_ADJECTIVE .
+
+    $default  reduce using rule 8 (Adjective)
+
+
+State 301
+
+    7 Adjective: NEUTRAL_ADJECTIVE .
+
+    $default  reduce using rule 7 (Adjective)
+
+
+State 302
+
+    6 Adjective: POSITIVE_ADJECTIVE .
+
+    $default  reduce using rule 6 (Adjective)
+
+
+State 303
+
+   45 Equality: AS Adjective . AS
+   47         | AS Adjective . error
+
+    error  shift, and go to state 335
+    AS     shift, and go to state 336
+
+
+State 304
+
+   95 PositiveComparative: LESS NEGATIVE_ADJECTIVE .
+
+    $default  reduce using rule 95 (PositiveComparative)
+
+
+State 305
+
+   79 NegativeComparative: LESS POSITIVE_ADJECTIVE .
+
+    $default  reduce using rule 79 (NegativeComparative)
+
+
+State 306
+
+   78 NegativeComparative: MORE NEGATIVE_ADJECTIVE .
+
+    $default  reduce using rule 78 (NegativeComparative)
+
+
+State 307
+
+   94 PositiveComparative: MORE POSITIVE_ADJECTIVE .
+
+    $default  reduce using rule 94 (PositiveComparative)
+
+
+State 308
+
+   25 Comparison: NOT NonnegatedComparison .
+
+    $default  reduce using rule 25 (Comparison)
+
+
+State 309
+
+   49 Inequality: Comparative error .
+
+    $default  reduce using rule 49 (Inequality)
+
+
+State 310
+
+   48 Inequality: Comparative THAN .
+
+    $default  reduce using rule 48 (Inequality)
+
+
+State 311
+
+  106 Question: BE error Comparison Value . QuestionSymbol
+
+    QUESTION_MARK  shift, and go to state 74
+
+    QuestionSymbol  go to state 337
+
+
+State 312
+
+  224 Value: BinaryOperator error AND . Value
+
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 338
+
+
+State 313
+
+  223 Value: BinaryOperator Value error . Value
+
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 339
+
+
+State 314
+
+  220 Value: BinaryOperator Value AND . Value
+  222      | BinaryOperator Value AND . error
+
+    error                                  shift, and go to state 340
+    ARTICLE                                shift, and go to state 170
+    CHARACTER                              shift, and go to state 171
+    FIRST_PERSON                           shift, and go to state 172
+    FIRST_PERSON_POSSESSIVE                shift, and go to state 173
+    FIRST_PERSON_REFLEXIVE                 shift, and go to state 174
+    NOTHING                                shift, and go to state 175
+    SECOND_PERSON                          shift, and go to state 176
+    SECOND_PERSON_POSSESSIVE               shift, and go to state 177
+    SECOND_PERSON_REFLEXIVE                shift, and go to state 178
+    THIRD_PERSON_POSSESSIVE                shift, and go to state 179
+    THE_CUBE_OF                            shift, and go to state 180
+    THE_DIFFERENCE_BETWEEN                 shift, and go to state 181
+    THE_FACTORIAL_OF                       shift, and go to state 182
+    THE_PRODUCT_OF                         shift, and go to state 183
+    THE_QUOTIENT_BETWEEN                   shift, and go to state 184
+    THE_REMAINDER_OF_THE_QUOTIENT_BETWEEN  shift, and go to state 185
+    THE_SQUARE_OF                          shift, and go to state 186
+    THE_SQUARE_ROOT_OF                     shift, and go to state 187
+    THE_SUM_OF                             shift, and go to state 188
+    TWICE                                  shift, and go to state 189
+
+    BinaryOperator  go to state 190
+    Constant        go to state 191
+    Pronoun         go to state 192
+    UnaryOperator   go to state 193
+    Value           go to state 341
+
+
+State 315
+
+  107 Question: BE Value error Value . QuestionSymbol
+
+    QUESTION_MARK  shift, and go to state 74
+
+    QuestionSymbol  go to state 342
+
+
+State 316
+
+  108 Question: BE Value Comparison error . QuestionSymbol
+
+    QUESTION_MARK  shift, and go to state 74
+
+    QuestionSymbol  go to state 343
+
+
+State 317
+
+  105 Question: BE Value Comparison Value . QuestionSymbol
+
+    QUESTION_MARK  shift, and go to state 74
+
+    QuestionSymbol  go to state 344
+
+
+State 318
+
+  135 Statement: SECOND_PERSON error Constant StatementSymbol .
+
+    $default  reduce using rule 135 (Statement)
+
+
+State 319
+
+  141 Statement: SECOND_PERSON error Equality Value . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 345
+
+
+State 320
+
+  134 Statement: SECOND_PERSON BE error StatementSymbol .
+
+    $default  reduce using rule 134 (Statement)
+
+
+State 321
+
+  140 Statement: SECOND_PERSON BE error Value . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 346
+
+
+State 322
+
+  133 Statement: SECOND_PERSON BE Constant error .
+
+    $default  reduce using rule 133 (Statement)
+
+
+State 323
+
+  130 Statement: SECOND_PERSON BE Constant StatementSymbol .
+
+    $default  reduce using rule 130 (Statement)
+
+
+State 324
+
+  139 Statement: SECOND_PERSON BE Equality error . StatementSymbol
+
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 347
+
+
+State 325
+
+  132 Statement: SECOND_PERSON BE Equality Value . StatementSymbol
+  138          | SECOND_PERSON BE Equality Value . error
+
+    error             shift, and go to state 348
+    EXCLAMATION_MARK  shift, and go to state 72
+    PERIOD            shift, and go to state 73
+
+    StatementSymbol  go to state 349
+
+
+State 326
+
+   56 InOut: LISTEN_TO error HEART StatementSymbol .
+
+    $default  reduce using rule 56 (InOut)
+
+
+State 327
+
+   58 InOut: LISTEN_TO SECOND_PERSON_POSSESSIVE error StatementSymbol .
+
+    $default  reduce using rule 58 (InOut)
+
+
+State 328
+
+   61 InOut: LISTEN_TO SECOND_PERSON_POSSESSIVE HEART error .
+
+    $default  reduce using rule 61 (InOut)
+
+
+State 329
+
+   52 InOut: LISTEN_TO SECOND_PERSON_POSSESSIVE HEART StatementSymbol .
+
+    $default  reduce using rule 52 (InOut)
+
+
+State 330
+
+   55 InOut: SPEAK error MIND StatementSymbol .
+
+    $default  reduce using rule 55 (InOut)
+
+
+State 331
+
+   57 InOut: SPEAK SECOND_PERSON_POSSESSIVE error StatementSymbol .
+
+    $default  reduce using rule 57 (InOut)
+
+
+State 332
+
+   60 InOut: SPEAK SECOND_PERSON_POSSESSIVE MIND error .
+
+    $default  reduce using rule 60 (InOut)
+
+
+State 333
+
+   51 InOut: SPEAK SECOND_PERSON_POSSESSIVE MIND StatementSymbol .
+
+    $default  reduce using rule 51 (InOut)
+
+
+State 334
+
+   46 Equality: AS error AS .
+
+    $default  reduce using rule 46 (Equality)
+
+
+State 335
+
+   47 Equality: AS Adjective error .
+
+    $default  reduce using rule 47 (Equality)
+
+
+State 336
+
+   45 Equality: AS Adjective AS .
+
+    $default  reduce using rule 45 (Equality)
+
+
+State 337
+
+  106 Question: BE error Comparison Value QuestionSymbol .
+
+    $default  reduce using rule 106 (Question)
+
+
+State 338
+
+  224 Value: BinaryOperator error AND Value .
+
+    $default  reduce using rule 224 (Value)
+
+
+State 339
+
+  223 Value: BinaryOperator Value error Value .
+
+    $default  reduce using rule 223 (Value)
+
+
+State 340
+
+  222 Value: BinaryOperator Value AND error .
+
+    $default  reduce using rule 222 (Value)
+
+
+State 341
+
+  220 Value: BinaryOperator Value AND Value .
+
+    $default  reduce using rule 220 (Value)
+
+
+State 342
+
+  107 Question: BE Value error Value QuestionSymbol .
+
+    $default  reduce using rule 107 (Question)
+
+
+State 343
+
+  108 Question: BE Value Comparison error QuestionSymbol .
+
+    $default  reduce using rule 108 (Question)
+
+
+State 344
+
+  105 Question: BE Value Comparison Value QuestionSymbol .
+
+    $default  reduce using rule 105 (Question)
+
+
+State 345
+
+  141 Statement: SECOND_PERSON error Equality Value StatementSymbol .
+
+    $default  reduce using rule 141 (Statement)
+
+
+State 346
+
+  140 Statement: SECOND_PERSON BE error Value StatementSymbol .
+
+    $default  reduce using rule 140 (Statement)
+
+
+State 347
+
+  139 Statement: SECOND_PERSON BE Equality error StatementSymbol .
+
+    $default  reduce using rule 139 (Statement)
+
+
+State 348
+
+  138 Statement: SECOND_PERSON BE Equality Value error .
+
+    $default  reduce using rule 138 (Statement)
+
+
+State 349
+
+  132 Statement: SECOND_PERSON BE Equality Value StatementSymbol .
+
+    $default  reduce using rule 132 (Statement)

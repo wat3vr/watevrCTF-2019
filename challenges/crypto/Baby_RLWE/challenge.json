@@ -1,0 +1,17 @@
+{
+    "flag": "rlwe_and_statistics_are_very_trivial_when_you_reuse_same_private_keys#02849jedjdjdj202ie9395u6ky",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "crypto"
+    ],
+    "authors": [
+        "QMechanic"
+    ],
+    "title": "Baby RLWE",
+    "description": "Mateusz carried a huge jar of small papers with public keys written on them, but he tripped and accidentally dropped them into the scanner and made a txt file out of them! D:\nNote: This challenge is just an introduction to RLWE, the flag is (in standard format) encoded inside the private key.",
+    "uses_docker": false,
+    "build_script": "bash move.sh",
+    "solve_script": "sage baby_rlwe_solution.sage",
+    "changeable_flag": true
+}

@@ -1,0 +1,20 @@
+{
+    "flag": "d0_y0u_l1k3_my_c55_5h4d0w5",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "web"
+    ],
+    "authors": [
+        "mateuszdrwal"
+    ],
+    "title": "Super Calculator",
+    "description": "The classic calcpylator is back!",
+    "uses_docker": true,
+    "website_services": [
+        80
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

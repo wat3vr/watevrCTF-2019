@@ -1,0 +1,18 @@
+{
+    "flag": "Super_Secure_Servers_are_not_always_so_secure",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "crypto"
+    ],
+    "authors": [
+        "nnewram",
+        "QMechanic"
+    ],
+    "title": "Crypto over the intrawebs",
+    "description": "I was hosting a very secure python chat server during my lunch break and I saw two of my classmates connect to it over the local network. Unfortunately, they had removed most of the code when i came up to them. I don't know what they said, can you help me figure it out?",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": false
+}

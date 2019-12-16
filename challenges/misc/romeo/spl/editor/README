@@ -1,0 +1,14 @@
+HOW TO INSTALL THE SPL MAJOR MODE FOR EMACS
+
+1. Add the line
+
+      (autoload 'spl-mode "/path/to/spl.el" nil t)
+
+   to your .emacs file. (Make sure to change /path/to/spl.el to the
+   path where spl.el actually is!) Now, you can activate spl-mode the
+   obvious way, with "M-x spl-mode".
+
+2. If you want this mode to start automatically when you visit files
+   named *.spl, add this line too:
+
+      (add-to-list 'auto-mode-alist '("\\.spl\\'" . spl-mode))
