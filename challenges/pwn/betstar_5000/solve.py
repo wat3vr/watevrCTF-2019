@@ -7,7 +7,7 @@ def writeup():
 	'''
 	The program has a format string vulnerablility when printing the winner of each round.
 	We can leak the base of libc and watevr else we need with the original players.
-	After that we add 4 players for the sole purpose to replace strcmp@got with system.
+	After that we add 2 players for the sole purpose to replace strcmp@got with system.
 
 	Libc version: i386-2.27
 
