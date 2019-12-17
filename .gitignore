@@ -7,8 +7,6 @@ challenges/pwn/bløckkæde/out
 flag.txt
 challenges/forensics/photos/images
 challenges/forensics/photos/challenge
-challenges/forensics/photos/collage.png
-challenges/forensics/photos/collage2.png
 challenges/forensics/isomorpholder/downloads_zip/
 challenges/forensics/blur_image/result.png
 challenges/reversing/LibrariansNightmare/container/backend.py
