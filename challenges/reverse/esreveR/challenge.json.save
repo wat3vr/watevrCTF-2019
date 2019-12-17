@@ -1,0 +1,17 @@
+watevr{esrever_reversed_youtube.com/watch?v=I8ijb4Zee5E}{
+    "flag": "If_you_reverse_the_reversed_reverse_do_you_then_get_the_reversed_reverse_of_the_reversed_reverse_or_do_you_get_the_reverse_of_the_reversed_reverse?_since_you_reversed_the_reverse_reverse_reverse_or_esrever_if_you_want_to_call_it_that_you_really_should_know_this_stuff_anyways_here_is_your_youtube_link_i_promise_you_it_isnt_reversed_in_any_way_https://www.youtube.com/watch?v=I8ijb4Zee5E",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reversing"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "esreveR",
+    "description": "If you reverse a reversed program, in reverse. Have you then reversly reversed a reverse reverse or have you reversed the reversed reverse, in reverse?",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

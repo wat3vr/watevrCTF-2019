@@ -1,0 +1,21 @@
+{
+    "flag": "And_I_thought_brainfuck_was_a_hjärnknull_jeez_youtube.com/watch?v=CAb_bCtKuXg",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "misc"
+    ],
+    "authors": [
+        "nnewram",
+        "daydun"
+    ],
+    "title": "Hjärnknull",
+    "description": "Watevr has difficulities making a decent calculator, so we are outsourcing! Oh and we ofcourse want you to do it in our own and therefore superior language, hjärnknull! Best of luck, you will need it.",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

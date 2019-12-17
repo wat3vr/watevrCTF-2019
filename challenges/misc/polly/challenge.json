@@ -1,0 +1,18 @@
+{
+    "flag": "polly_polynomials_youtube.com/watch?v=THNWVVn9JO0",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "misc"
+    ],
+    "authors": [
+        "nnewram",
+        "QMechanic"
+    ],
+    "title": "Polly",
+    "description": "I sure do love my polly uh ehh i mean polynomials, heh. Yeah that's what I meant...",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": false
+}

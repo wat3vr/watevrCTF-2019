@@ -1,0 +1,17 @@
+{
+    "flag": "th4nk5_h4ck1ng_for_s0ju_hackingforsoju.team",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reverse"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Hacking For Vodka",
+    "description": "We ran out of soju so you will have to hack for vodka now, smh my head! Anyways, good luck.",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

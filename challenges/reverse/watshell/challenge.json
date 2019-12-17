@@ -1,0 +1,21 @@
+{
+    "flag": "oops_1_f0rg0t_to_use_r4ndom_k3ys!_youtube.com/watch?v=BaACrT6Ydik",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reverse",
+        "crypto"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Watshell",
+    "description": "We have had such terrible experience with socalled secure systems that we decided to create our own! Now we can finally ensure user privacy in remote shells!",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

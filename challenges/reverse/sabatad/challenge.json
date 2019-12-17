@@ -1,0 +1,21 @@
+{
+    "flag": "sql_is_overrated_use_txt_instead!_youtube.com/watch?v=7PCkvCPvDXk",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reverse",
+	"pwn"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "sabataD",
+    "description": "!tuo ti kcehc s'tel ,woW !llewsa ti rof ipa na tuo gnivig era yeht dna ho ,esabatad looc repus wen a evah elgoog draeh i",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

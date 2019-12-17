@@ -1,0 +1,17 @@
+{
+    "flag": "esrever_reversed_youtube.com/watch?v=I8ijb4Zee5E",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reverse"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "esreveR",
+    "description": "If you reverse a reversed program, in reverse. Have you then reversly reversed a reverse reverse or have you reversed the reversed reverse, in reverse?",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

@@ -1,0 +1,20 @@
+{
+    "flag": "wait_how_was_the_flag_file_was_specifically_checked_for?!_youtube.com/watch?v=KXnG0KkVzo8",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "pwn"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Wat-sql",
+    "description": "The success of sabataD was so great that we implemented an even better and even more secure system! Wat-sql offers secure write and read access!",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

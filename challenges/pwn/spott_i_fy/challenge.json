@@ -1,0 +1,21 @@
+{
+    "flag": "spott-i-fy_1s_my_n3w_goto_sabataD!_youtube.com/watch?v=eserxoOmeeY",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "pwn",
+        "reverse"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Spott-i-fy",
+    "description": "Spotify is sooo hard to use, so i decided to make a super secure api for it!",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": false
+}

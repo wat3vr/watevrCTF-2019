@@ -1,0 +1,18 @@
+{
+    "flag": "3ncrytion_is_overrated_youtube.com/watch?v=OPf0YbXqDm0",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reverse",
+        "beginner"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Timeout",
+    "description": "Stop, wait a minute!",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "./solve.sh",
+    "changeable_flag": false
+}

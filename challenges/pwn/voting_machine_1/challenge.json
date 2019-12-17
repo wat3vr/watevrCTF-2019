@@ -1,0 +1,21 @@
+{
+    "flag": "w3ll_th4t_w4s_pr3tty_tr1v1al_anyways_https://www.youtube.com/watch?v=Va4aF6rRdqU",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "pwn",
+        "beginner"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Voting Machine 1",
+    "description": "In a world with many uncertainties we need some kind of structure. Democracy is a big part of that, therefore we need voting machines! Well, at least if they are safe...",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

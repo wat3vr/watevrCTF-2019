@@ -1,0 +1,17 @@
+{
+    "flag": "this_must_be_the_best_encryption_method_evr_henceforth_this_is_the_new_Advanced_Encryption_Standard_anyways_i_dont_really_have_a_good_vid_but_i_really_enjoy_this_song_i_hope_you_will_enjoy_it_aswell!_youtube.com/watch?v=E5yFcdPAGv0",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reverse"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Repyc",
+    "description": "woo thi chal sooo repyc!",
+    "uses_docker": false,
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": false
+}

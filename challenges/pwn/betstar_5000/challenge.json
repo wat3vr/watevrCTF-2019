@@ -1,0 +1,20 @@
+{
+    "flag": "i_G0Tta_f33ling_https://www.youtube.com/watch?v=uSD4vsh1zDA",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "pwn"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Betstar 5000",
+    "description": "Welcome to our betting service! I hope you will like it :))",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

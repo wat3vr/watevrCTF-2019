@@ -1,0 +1,16 @@
+{
+    "flag": "icantspeel_tiny.cc/2qtdez",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "misc",
+        "beginner"
+    ],
+    "authors": ["nnewram"],
+    "title": "Unspaellablle",
+    "description": "I think the author of this episode's script had a stroke or something... Or maybe it's just me?",
+    "uses_docker": false,
+    "build_script": "python3 build.py",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

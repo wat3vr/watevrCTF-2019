@@ -1,0 +1,21 @@
+{
+    "flag": "GOT_som3_fl4g_for_you_https://www.youtube.com/watch?v=hYeFcSq7Mxg",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "pwn"
+    ],
+    "authors": [
+        "nnewram"
+    ],
+    "title": "Voting Machine 2",
+    "description": "In a world with many uncertainties we need some kind of structure. Democracy is a big part of that, therefore we need voting machines! Well, at least if they are safe...",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "./build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true,
+    "unlocked_by": "Voting Machine 1"
+}
