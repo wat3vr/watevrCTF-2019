@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <meta name="author" content="web_server.py">
+
+    <style>
+
+
+.warning {
+    z-index: 2;
+    margin-top: 100px;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    text-align: center;
+    padding: 10px;
+    transform: rotate(3deg) scale(1.1);
+    background: linear-gradient(
+        100deg,
+        #fcba03 0%,
+        #fcba03 10%,
+        #364052 10.5%,
+        #364052 20%,
+        #fcba03 20.5%,
+        #fcba03 30%,
+        #364052 30.5%,
+        #364052 40%,
+        #fcba03 40.5%,
+        #fcba03 50%,
+        #364052 50.5%,
+        #364052 60%,
+        #fcba03 60.5%,
+        #fcba03 70%,
+        #364052 70.5%,
+        #364052 80%,
+        #fcba03 80.5%,
+        #fcba03 90%,
+        #364052 90.5%,
+        #364052 100%
+    );
+}
+
+.warning > p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ada09e;
+    background: white;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    display: inline;
+}
+
+#background {
+    z-index: -1;
+    width: 100%;
+    filter: blur(3px) sepia(5);
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#header {
+    background-color: rgba(244, 255, 255, 0.8);
+    margin: -8px -8px 0px -8px;
+    border: solid black;
+    border-width: 0 0 1px 0;
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+#header * {
+    top: -5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#title {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    text-align: center;
+    font-size: 48px;
+    font-family: Helvetica;
+    font-weight: lighter;
+}
+
+
+#content {
+    width: 80%;
+    background-color: rgba(244, 255, 255, 0.8);
+    height: 800px;
+    margin: auto;
+    padding: 40px;
+}
+
+    </style>
+  </head>
+
+  <body>
+    <div id=header>
+      <p id="title"> Welcome to the Swedish State Archive! </p>
+    </div>
+    <div id="body">
+      <div id="content">
+        hello world
+      </div>
+    </div>
+    <br />
+    <img id="background" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/NV4A0354_02.jpg/640px-NV4A0354_02.jpg">
+    <div class="warning"> <p> This site is under construction! </p> </div>
+  </body>
+</html>

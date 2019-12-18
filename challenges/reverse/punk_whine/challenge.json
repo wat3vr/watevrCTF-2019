@@ -1,0 +1,17 @@
+{
+    "flag": "we_have_hit_rock_bottom",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reverse"
+    ],
+    "authors": [
+        "loovjo"
+    ],
+    "title": "Punk Whine",
+    "description": "\"Yields this sentence when preceded by its quotation\" almost yields this sentence when preceded by its quotation",
+    "uses_docker": false,
+    "build_script": "python3 build.py",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

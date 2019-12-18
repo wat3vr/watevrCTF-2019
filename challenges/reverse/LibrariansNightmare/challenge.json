@@ -1,0 +1,21 @@
+{
+    "flag": "S10P_B4BBLING",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "reverse",
+        "crypto"
+    ],
+    "authors": [
+        "loovjo"
+    ],
+    "title": "Librarians Nightmare",
+    "description": "\"Oh no\", the Librarian whispered as she dropped her book. \"I was just getting to the part about the flag, but I don't remember what page it was. All I remember is the word <code>watevr{</code>. Can you help me find where I was?\"",
+    "uses_docker": true,
+    "website_services": [
+        80
+    ],
+    "build_script": "python3 generate.py",
+    "solve_script": "python3 solver.py",
+    "changeable_flag": true
+}

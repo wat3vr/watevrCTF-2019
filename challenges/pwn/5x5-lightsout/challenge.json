@@ -1,0 +1,20 @@
+{
+    "flag": "maybe_well_implement_M-x_tetris_some_day",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "pwn"
+    ],
+    "authors": [
+        "loovjo"
+    ],
+    "title": "M-x 5x5",
+    "description": "I'm working on rewriting Emacs in C, and have gotten quite a lot of it done. Can you help me, and see if there are any security issues with it? \n\nNote: A more functional version can be found here: http://www.logicgamesonline.com/lightsout/",
+    "uses_docker": true,
+    "netcat_services": [
+        50000
+    ],
+    "build_script": "sh build.sh",
+    "solve_script": "python3 solve.py",
+    "changeable_flag": true
+}

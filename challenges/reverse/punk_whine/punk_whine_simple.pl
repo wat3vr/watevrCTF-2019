@@ -1,0 +1,12 @@
+use Math::GMP;
+$n=Math::GMP->new(qq(92814957264170496941327799012993738210975448874386695149190853013764305088775));
+$i=20;
+$a=';
+$i=%d;
+$a=%c%s%c;
+$r = $n->bxor($n->blshift(1,0))->band(Math::GMP->new(2)**256-1);
+exit printf $a,$i-(print "use Math::GMP;\n\$n=Math::GMP->new(qq(",$r,"))"),39,$a,39 if$i;
+do{$c=($n+$i/3)%256;print chr$c if$c>31||$c==10}while$n>>=8;';
+$r = $n->bxor($n->blshift(1,0))->band(Math::GMP->new(2)**256-1);
+exit printf $a,$i-(print "use Math::GMP;\n\$n=Math::GMP->new(qq(",$r,"))"),39,$a,39 if$i;
+do{$c=$n%256;print chr$c if$c>31+$i||$c==10}while $n=$n->brshift(8);

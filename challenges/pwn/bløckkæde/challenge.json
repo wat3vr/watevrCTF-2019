@@ -1,0 +1,20 @@
+{
+  "flag": "more_like_blockdane",
+  "append_random_data": false,
+  "follows_flag_format": true,
+  "categories": [
+    "pwn"
+  ],
+  "authors": [
+    "loovjo"
+  ],
+  "title": "Danish Blockchain",
+  "description": "The programmers at Danske Bank heard about this new amazing technology called BlockChain, and just finished rebuilding their banking system using it, with extra protection against swedish hackers. Can you find a way to get enough money to buy the flag?",
+  "uses_docker": true,
+  "netcat_services": [
+        50000
+  ],
+  "build_script": "python3 build.py",
+  "solve_script": "python3 solve/solve.py",
+  "changeable_flag": true
+}

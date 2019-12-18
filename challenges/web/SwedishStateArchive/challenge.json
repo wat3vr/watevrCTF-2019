@@ -1,0 +1,20 @@
+{
+    "flag": "everything_is_offentligt",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "web"
+    ],
+    "authors": [
+        "loovjo"
+    ],
+    "title": "Swedish State Archive",
+    "description": "The Swedish State Archive are working on their new site, but it's not quite finished yet...",
+    "uses_docker": true,
+    "website_services": [
+        80
+    ],
+    "build_script": "python3 generate.py",
+    "solve_script": "true",
+    "changeable_flag": true
+}

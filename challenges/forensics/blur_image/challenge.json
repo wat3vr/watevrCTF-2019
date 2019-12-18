@@ -1,0 +1,17 @@
+{
+    "flag": "blur_blur_I_am_a_fish_blur_blur",
+    "append_random_data": false,
+    "follows_flag_format": true,
+    "categories": [
+        "forensics"
+    ],
+    "authors": [
+        "loovjo"
+    ],
+    "title": "Blurred Image",
+    "description": "So I found this cool flag while running around, and decided to take a picture of it. But when I went to show the picture to my friends, it was all blurry! Can you help me get out of this convoluted situation?",
+    "uses_docker": false,
+    "build_script": "python3 generate.py",
+    "solve_script": "python3 solve_fake.py",
+    "changeable_flag": false
+}

@@ -1,0 +1,12 @@
+Initial commit, add web_server.py, index.html and folder.html
+did some work on flag.txt
+Oops, flag.txt should not be in the repo.
+Add pretty image to index.html
+Make the title prettier
+Add CSS stuff
+Make warning labelfixed
+Add some positioning, make the site look better
+Add links
+Change background image
+Add content text
+Make things a bit tighter

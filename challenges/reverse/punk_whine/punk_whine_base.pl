@@ -1,0 +1,12 @@
+use Math::GMP;
+$n=Math::GMP->new(qq([[[--- N ---]]]));
+$i=[[[--- I ---]]];
+$a=';
+$i=%d;
+$a=%c%s%c;
+$r = $n->bxor($n->blshift(1,0))->band(Math::GMP->new(2)**65535-1);
+exit printf $a,$i-(print "use Math::GMP;\n\$n=Math::GMP->new(qq(",$r,"))"),39,$a,39 if$i;
+do{$c=($n+$i/3)%256;print chr$c if$c>31||$c==10}while$n>>=8;';
+$r = $n->bxor($n->blshift(1,0))->band(Math::GMP->new(2)**65535-1);
+exit printf $a,$i-(print "use Math::GMP;\n\$n=Math::GMP->new(qq(",$r,"))"),39,$a,39 if$i;
+do{$c=$n%256;print chr$c if$c>31+$i||$c==10}while $n=$n->brshift(8);
