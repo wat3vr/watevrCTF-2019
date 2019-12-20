@@ -16,7 +16,7 @@ pixel after applying the convolution. If we choose those pixels as the ones in t
 original pixel values. These give enough information to give us the flter. This filter can be seen in the
 file `filter.png`.
 
-![filter](https://github.com/mateuszdrwal/watevrCTF-2019/blob/release/challenges/forensics/blur_image/filter.png "filter.png")
+![filter](filter.png)
 
 Once we know the filter, we can create a new, big system of equations to solve for the original image. The
 variables are each pixel in the original image, and each pixel in the blurry image give us one equation.
